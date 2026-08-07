@@ -1,0 +1,10 @@
+﻿raw_value,inquiry_type_code,inquiry_type_name
+delivery,DELIVERY,배송
+Delivery,DELIVERY,배송
+payment,PAYMENT,결제
+PAYMENT,PAYMENT,결제
+return,RETURN,반품
+exchange,EXCHANGE,교환
+account,ACCOUNT,계정
+technical,TECHNICAL,기술
+product_quality,PRODUCT_QUALITY,품질

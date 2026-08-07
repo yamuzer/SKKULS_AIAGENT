@@ -1,0 +1,87 @@
+문제 1. CSV 검증과 신규 문의 적재
+
+
+고객지원팀으로부터 `data/inquiry_insert_target.csv` 파일을 전달받았습니다.
+
+CSV에는 정상 신규 문의만 있는 것이 아니라 다음 사례가 함께 들어 있습니다.
+
+- 이미 데이터베이스에 적재된 문의
+- 기준 고객 테이블에 존재하지 않는 고객
+- `CUST-0001` 형식에 맞지 않는 고객코드
+- 중복된 문의번호
+- 음수 응답시간
+- 범위를 벗어난 만족도
+- 허용되지 않은 우선순위·상태·SLA 상태
+
+이 데이터를 바로 데이터베이스에 저장하지 말고,
+Pandas와 SQLAlchemy를 사용하여 검증한 후 정상 신규 문의만 적재하세요.
+
+요구사항
+
+1. CSV 읽기
+
+- `data/inquiry_insert_target.csv`를 읽습니다.
+- 문자열, nullable 정수, boolean 자료형을 명시합니다.
+- `received_at`은 날짜 자료형으로 변환합니다.
+
+2. DB 적재용 DataFrame 생성
+
+- 원본 `customer_id`를 `source_customer_code`로 보존합니다.
+- 정규표현식 `^CUST-(\d{4})$`로 숫자 고객번호를 추출합니다.
+- 추출한 고객번호를 Pandas `Int64`로 변환합니다.
+- `NO_PRODUCT`는 결측치로 변경합니다.
+
+ 3. 입력 데이터 검증
+
+다음 행을 적재 제외 대상으로 분리합니다.
+
+- 고객코드 형식 오류
+- 중복 `inquiry_id`에 포함된 모든 행
+- 음수 `response_minutes`
+- 1~5 범위를 벗어난 `satisfaction_score`
+- 허용되지 않은 `priority`
+- 허용되지 않은 `status`
+- 허용되지 않은 `sla_status`
+
+오류 행에는 `rejection_reason` 컬럼을 추가하세요.
+
+4. DB 기존 정보 조회
+
+SQLAlchemy와 `pd.read_sql_query()`를 사용하여 다음 집합을 만드세요.
+
+- 기존 고객번호 집합
+- 기존 문의번호 집합
+
+5. 적재 그룹 분리
+
+검증을 통과한 행을 다음 세 그룹으로 나누세요.
+
+- `new_insert_df`: 신규 적재 대상
+- `missing_customer_df`: 고객 기준정보가 없는 문의
+- `already_loaded_df`: 이미 적재된 문의
+
+6. 신규 데이터 적재
+
+- `DataFrame.to_sql()`을 사용합니다.
+- 스키마: `sqlalchemy_review`
+- 테이블: `customer_inquiry`
+- `if_exists="append"`
+- `chunksize=100`
+- `method="multi"`
+- 트랜잭션이 커밋되도록 `engine.begin()`을 사용합니다.
+
+7. 결과 파일 저장
+
+`output/problem1` 폴더에 다음 파일을 저장하세요.
+
+- `newly_loaded_inquiries.csv`
+- `missing_customer_inquiries.csv`
+- `already_loaded_inquiries.csv`
+- `rejected_inquiries.csv`
+- `load_summary.csv`
+
+확인할 핵심
+
+단순히 CSV를 읽어 `to_sql()`을 실행하는 것이 아니라,
+변환 → 검증 → 기준정보 확인 → 그룹 분리 → 정상 행 적재 → 결과 저장
+순서로 처리해야 합니다.

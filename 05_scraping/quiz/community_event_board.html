@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>지역 문화행사 신청 안내</title>
+
+  <style>
+    body {
+      margin: 0;
+      color: #1f2937;
+      background: #f4f6f8;
+      font-family: Arial, "Malgun Gothic", sans-serif;
+    }
+
+    .hero {
+      padding: 34px 20px;
+      color: white;
+      background: #263f7a;
+    }
+
+    #board-title,
+    .board-description,
+    .region-menu,
+    #event-board,
+    .table-section,
+    .notice-section {
+      max-width: 1180px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .region-menu {
+      display: flex;
+      gap: 8px;
+      padding: 20px;
+      list-style: none;
+    }
+
+    .region-menu a {
+      display: inline-block;
+      padding: 7px 12px;
+      color: #263f7a;
+      background: white;
+      border: 1px solid #ccd5ea;
+      border-radius: 18px;
+      text-decoration: none;
+    }
+
+    #event-board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      padding: 0 20px 34px;
+    }
+
+    .event-card {
+      overflow: hidden;
+      background: white;
+      border: 1px solid #d9dde5;
+      border-radius: 12px;
+    }
+
+    .event-card.recommended {
+      border: 2px solid #e88a1a;
+    }
+
+    .event-card.online-event {
+      background: #f7fbff;
+    }
+
+    .event-thumbnail {
+      display: flex;
+      height: 105px;
+      align-items: center;
+      justify-content: center;
+      color: #243b6b;
+      background: #dfe8fb;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .event-content {
+      padding: 16px;
+    }
+
+    .event-category {
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    .event-name {
+      min-height: 54px;
+      margin: 8px 0;
+    }
+
+    .organizer,
+    .event-schedule,
+    .event-location {
+      color: #4b5563;
+    }
+
+    .event-metrics {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .event-metrics span {
+      padding: 5px 8px;
+      background: #f1f3f7;
+      border-radius: 5px;
+      font-size: 13px;
+    }
+
+    .registration-status {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 5px 9px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .registration-status.open {
+      color: #166534;
+      background: #dcfce7;
+    }
+
+    .registration-status.closed {
+      color: #991b1b;
+      background: #fee2e2;
+    }
+
+    .registration-status.waiting {
+      color: #854d0e;
+      background: #fef9c3;
+    }
+
+    .table-section,
+    .notice-section {
+      box-sizing: border-box;
+      margin-bottom: 28px;
+      padding: 20px;
+      background: white;
+      border: 1px solid #d9dde5;
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 9px;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: left;
+    }
+
+    footer {
+      padding: 24px;
+      color: white;
+      background: #263f7a;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="hero">
+    <h1 id="board-title">2026 지역 문화행사 신청 안내</h1>
+    <p class="board-description">
+      태그, 속성, CSS 선택자, 반복 카드, 링크 쿼리스트링과 표 구조를
+      연습하기 위한 교육용 HTML 페이지입니다.
+    </p>
+  </header>
+
+  <nav>
+    <ul class="region-menu">
+      <li><a href="#seoul" data-region-code="SEL">서울</a></li>
+      <li><a href="#busan" data-region-code="BSN">부산</a></li>
+      <li><a href="#daejeon" data-region-code="DJN">대전</a></li>
+      <li><a href="#gwangju" data-region-code="GWJ">광주</a></li>
+      <li><a href="#incheon" data-region-code="ICN">인천</a></li>
+      <li><a href="#suwon" data-region-code="SWN">수원</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="event-board" class="event-board">
+      
+        <article class="event-card recommended"
+                 data-event-no="EVT-26001"
+                 data-region="서울"
+                 data-capacity="40"
+                 data-fee="0">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26001&amp;source=review-practice&amp;region=%EC%84%9C%EC%9A%B8"
+             title="도심 야간 재즈 콘서트 상세 보기">
+            <span class="event-thumbnail">공연</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">공연</span>
+            <h2 class="event-name">도심 야간 재즈 콘서트</h2>
+
+            <p class="organizer">
+              주최: <strong>도시문화재단</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-10T10:00:00">2026-08-10 10:00</time>
+              <span class="end-time">~ 11:30</span>
+            </p>
+
+            <p class="event-location">서울 시민문화홀</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">무료</span>
+              <span class="event-rating">평점 4.0</span>
+              <span class="applicant-count">신청 18명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26002"
+                 data-region="부산"
+                 data-capacity="53"
+                 data-fee="5000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26002&amp;source=review-practice&amp;region=%EB%B6%80%EC%82%B0"
+             title="현대 일러스트 특별전 상세 보기">
+            <span class="event-thumbnail">전시</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">전시</span>
+            <h2 class="event-name">현대 일러스트 특별전</h2>
+
+            <p class="organizer">
+              주최: <strong>생활예술센터</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-11T12:00:00">2026-08-11 12:00</time>
+              <span class="end-time">~ 14:00</span>
+            </p>
+
+            <p class="event-location">부산 아트스페이스 2관</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">5,000원</span>
+              <span class="event-rating">평점 4.7</span>
+              <span class="applicant-count">신청 37명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26003"
+                 data-region="대전"
+                 data-capacity="66"
+                 data-fee="10000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26003&amp;source=review-practice&amp;region=%EB%8C%80%EC%A0%84"
+             title="가족 도예 체험교실 상세 보기">
+            <span class="event-thumbnail">체험</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">체험</span>
+            <h2 class="event-name">가족 도예 체험교실</h2>
+
+            <p class="organizer">
+              주최: <strong>청년문화기획단</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-12T14:00:00">2026-08-12 14:00</time>
+              <span class="end-time">~ 16:30</span>
+            </p>
+
+            <p class="event-location">대전 생활문화센터</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">10,000원</span>
+              <span class="event-rating">평점 4.4</span>
+              <span class="applicant-count">신청 56명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card recommended online-event"
+                 data-event-no="EVT-26004"
+                 data-region="광주"
+                 data-capacity="79"
+                 data-fee="15000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26004&amp;source=review-practice&amp;region=%EA%B4%91%EC%A3%BC"
+             title="데이터로 읽는 도시 이야기 상세 보기">
+            <span class="event-thumbnail">강연</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">강연</span>
+            <h2 class="event-name">데이터로 읽는 도시 이야기</h2>
+
+            <p class="organizer">
+              주최: <strong>지역창작소</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-13T16:00:00">2026-08-13 16:00</time>
+              <span class="end-time">~ 19:00</span>
+            </p>
+
+            <p class="event-location">온라인 스트리밍</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">15,000원</span>
+              <span class="event-rating">평점 4.1</span>
+              <span class="applicant-count">신청 75명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26005"
+                 data-region="인천"
+                 data-capacity="92"
+                 data-fee="20000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26005&amp;source=review-practice&amp;region=%EC%9D%B8%EC%B2%9C"
+             title="여름 골목문화 축제 상세 보기">
+            <span class="event-thumbnail">축제</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">축제</span>
+            <h2 class="event-name">여름 골목문화 축제</h2>
+
+            <p class="organizer">
+              주최: <strong>시민교육협회</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-14T10:00:00">2026-08-14 10:00</time>
+              <span class="end-time">~ 11:30</span>
+            </p>
+
+            <p class="event-location">인천 중앙광장</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">20,000원</span>
+              <span class="event-rating">평점 4.8</span>
+              <span class="applicant-count">신청 92명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26006"
+                 data-region="수원"
+                 data-capacity="105"
+                 data-fee="30000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26006&amp;source=review-practice&amp;region=%EC%88%98%EC%9B%90"
+             title="초보자를 위한 사진 워크숍 상세 보기">
+            <span class="event-thumbnail">워크숍</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">워크숍</span>
+            <h2 class="event-name">초보자를 위한 사진 워크숍</h2>
+
+            <p class="organizer">
+              주최: <strong>문화공간 라운드</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-15T12:00:00">2026-08-15 12:00</time>
+              <span class="end-time">~ 14:00</span>
+            </p>
+
+            <p class="event-location">수원 창작스튜디오</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">30,000원</span>
+              <span class="event-rating">평점 4.5</span>
+              <span class="applicant-count">신청 105명</span>
+            </div>
+
+            <span class="registration-status closed">
+              신청마감
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card recommended"
+                 data-event-no="EVT-26007"
+                 data-region="서울"
+                 data-capacity="118"
+                 data-fee="0">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26007&amp;source=review-practice&amp;region=%EC%84%9C%EC%9A%B8"
+             title="독립영화 감독과의 대화 상세 보기">
+            <span class="event-thumbnail">공연</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">공연</span>
+            <h2 class="event-name">독립영화 감독과의 대화</h2>
+
+            <p class="organizer">
+              주최: <strong>도시문화재단</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-16T14:00:00">2026-08-16 14:00</time>
+              <span class="end-time">~ 16:30</span>
+            </p>
+
+            <p class="event-location">서울 시민문화홀</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">무료</span>
+              <span class="event-rating">평점 4.2</span>
+              <span class="applicant-count">신청 118명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26008"
+                 data-region="부산"
+                 data-capacity="131"
+                 data-fee="5000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26008&amp;source=review-practice&amp;region=%EB%B6%80%EC%82%B0"
+             title="전통 매듭 공예 체험 상세 보기">
+            <span class="event-thumbnail">전시</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">전시</span>
+            <h2 class="event-name">전통 매듭 공예 체험</h2>
+
+            <p class="organizer">
+              주최: <strong>생활예술센터</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-17T16:00:00">2026-08-17 16:00</time>
+              <span class="end-time">~ 19:00</span>
+            </p>
+
+            <p class="event-location">부산 아트스페이스 2관</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">5,000원</span>
+              <span class="event-rating">평점 4.9</span>
+              <span class="applicant-count">신청 131명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card online-event"
+                 data-event-no="EVT-26009"
+                 data-region="대전"
+                 data-capacity="144"
+                 data-fee="10000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26009&amp;source=review-practice&amp;region=%EB%8C%80%EC%A0%84"
+             title="지역 작가 북토크 상세 보기">
+            <span class="event-thumbnail">체험</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">체험</span>
+            <h2 class="event-name">지역 작가 북토크</h2>
+
+            <p class="organizer">
+              주최: <strong>청년문화기획단</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-18T10:00:00">2026-08-18 10:00</time>
+              <span class="end-time">~ 11:30</span>
+            </p>
+
+            <p class="event-location">온라인 스트리밍</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">10,000원</span>
+              <span class="event-rating">평점 4.6</span>
+              <span class="applicant-count">신청 144명</span>
+            </div>
+
+            <span class="registration-status waiting">
+              대기접수
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26010"
+                 data-region="광주"
+                 data-capacity="157"
+                 data-fee="15000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26010&amp;source=review-practice&amp;region=%EA%B4%91%EC%A3%BC"
+             title="어린이 과학 놀이터 상세 보기">
+            <span class="event-thumbnail">강연</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">강연</span>
+            <h2 class="event-name">어린이 과학 놀이터</h2>
+
+            <p class="organizer">
+              주최: <strong>지역창작소</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-19T12:00:00">2026-08-19 12:00</time>
+              <span class="end-time">~ 14:00</span>
+            </p>
+
+            <p class="event-location">광주 도시기록관</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">15,000원</span>
+              <span class="event-rating">평점 4.3</span>
+              <span class="applicant-count">신청 157명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card recommended"
+                 data-event-no="EVT-26011"
+                 data-region="인천"
+                 data-capacity="170"
+                 data-fee="20000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26011&amp;source=review-practice&amp;region=%EC%9D%B8%EC%B2%9C"
+             title="퇴근길 클래식 살롱 상세 보기">
+            <span class="event-thumbnail">축제</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">축제</span>
+            <h2 class="event-name">퇴근길 클래식 살롱</h2>
+
+            <p class="organizer">
+              주최: <strong>시민교육협회</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-20T14:00:00">2026-08-20 14:00</time>
+              <span class="end-time">~ 16:30</span>
+            </p>
+
+            <p class="event-location">인천 중앙광장</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">20,000원</span>
+              <span class="event-rating">평점 4.0</span>
+              <span class="applicant-count">신청 18명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26012"
+                 data-region="수원"
+                 data-capacity="183"
+                 data-fee="30000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26012&amp;source=review-practice&amp;region=%EC%88%98%EC%9B%90"
+             title="업사이클링 생활소품 만들기 상세 보기">
+            <span class="event-thumbnail">워크숍</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">워크숍</span>
+            <h2 class="event-name">업사이클링 생활소품 만들기</h2>
+
+            <p class="organizer">
+              주최: <strong>문화공간 라운드</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-21T16:00:00">2026-08-21 16:00</time>
+              <span class="end-time">~ 19:00</span>
+            </p>
+
+            <p class="event-location">수원 창작스튜디오</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">30,000원</span>
+              <span class="event-rating">평점 4.7</span>
+              <span class="applicant-count">신청 183명</span>
+            </div>
+
+            <span class="registration-status closed">
+              신청마감
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card online-event"
+                 data-event-no="EVT-26013"
+                 data-region="서울"
+                 data-capacity="196"
+                 data-fee="0">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26013&amp;source=review-practice&amp;region=%EC%84%9C%EC%9A%B8"
+             title="로컬 브랜드 창업 강연 상세 보기">
+            <span class="event-thumbnail">공연</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">공연</span>
+            <h2 class="event-name">로컬 브랜드 창업 강연</h2>
+
+            <p class="organizer">
+              주최: <strong>도시문화재단</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-22T10:00:00">2026-08-22 10:00</time>
+              <span class="end-time">~ 11:30</span>
+            </p>
+
+            <p class="event-location">온라인 스트리밍</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">무료</span>
+              <span class="event-rating">평점 4.4</span>
+              <span class="applicant-count">신청 56명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26014"
+                 data-region="부산"
+                 data-capacity="48"
+                 data-fee="5000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26014&amp;source=review-practice&amp;region=%EB%B6%80%EC%82%B0"
+             title="한여름 거리 퍼레이드 상세 보기">
+            <span class="event-thumbnail">전시</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">전시</span>
+            <h2 class="event-name">한여름 거리 퍼레이드</h2>
+
+            <p class="organizer">
+              주최: <strong>생활예술센터</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-23T12:00:00">2026-08-23 12:00</time>
+              <span class="end-time">~ 14:00</span>
+            </p>
+
+            <p class="event-location">부산 아트스페이스 2관</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">5,000원</span>
+              <span class="event-rating">평점 4.1</span>
+              <span class="applicant-count">신청 48명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26015"
+                 data-region="대전"
+                 data-capacity="61"
+                 data-fee="10000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26015&amp;source=review-practice&amp;region=%EB%8C%80%EC%A0%84"
+             title="스마트폰 영상 제작교실 상세 보기">
+            <span class="event-thumbnail">체험</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">체험</span>
+            <h2 class="event-name">스마트폰 영상 제작교실</h2>
+
+            <p class="organizer">
+              주최: <strong>청년문화기획단</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-24T14:00:00">2026-08-24 14:00</time>
+              <span class="end-time">~ 16:30</span>
+            </p>
+
+            <p class="event-location">대전 생활문화센터</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">10,000원</span>
+              <span class="event-rating">평점 4.8</span>
+              <span class="applicant-count">신청 61명</span>
+            </div>
+
+            <span class="registration-status waiting">
+              대기접수
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card recommended"
+                 data-event-no="EVT-26016"
+                 data-region="광주"
+                 data-capacity="74"
+                 data-fee="15000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26016&amp;source=review-practice&amp;region=%EA%B4%91%EC%A3%BC"
+             title="도시 건축 사진전 상세 보기">
+            <span class="event-thumbnail">강연</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">강연</span>
+            <h2 class="event-name">도시 건축 사진전</h2>
+
+            <p class="organizer">
+              주최: <strong>지역창작소</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-25T16:00:00">2026-08-25 16:00</time>
+              <span class="end-time">~ 19:00</span>
+            </p>
+
+            <p class="event-location">광주 도시기록관</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">15,000원</span>
+              <span class="event-rating">평점 4.5</span>
+              <span class="applicant-count">신청 74명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26017"
+                 data-region="인천"
+                 data-capacity="87"
+                 data-fee="20000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26017&amp;source=review-practice&amp;region=%EC%9D%B8%EC%B2%9C"
+             title="청소년 코딩 문화캠프 상세 보기">
+            <span class="event-thumbnail">축제</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">축제</span>
+            <h2 class="event-name">청소년 코딩 문화캠프</h2>
+
+            <p class="organizer">
+              주최: <strong>시민교육협회</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-26T10:00:00">2026-08-26 10:00</time>
+              <span class="end-time">~ 11:30</span>
+            </p>
+
+            <p class="event-location">인천 중앙광장</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">20,000원</span>
+              <span class="event-rating">평점 4.2</span>
+              <span class="applicant-count">신청 87명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26018"
+                 data-region="수원"
+                 data-capacity="100"
+                 data-fee="30000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26018&amp;source=review-practice&amp;region=%EC%88%98%EC%9B%90"
+             title="세계음식 문화체험 상세 보기">
+            <span class="event-thumbnail">워크숍</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">워크숍</span>
+            <h2 class="event-name">세계음식 문화체험</h2>
+
+            <p class="organizer">
+              주최: <strong>문화공간 라운드</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-27T12:00:00">2026-08-27 12:00</time>
+              <span class="end-time">~ 14:00</span>
+            </p>
+
+            <p class="event-location">수원 창작스튜디오</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">30,000원</span>
+              <span class="event-rating">평점 4.9</span>
+              <span class="applicant-count">신청 100명</span>
+            </div>
+
+            <span class="registration-status closed">
+              신청마감
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card online-event"
+                 data-event-no="EVT-26019"
+                 data-region="서울"
+                 data-capacity="113"
+                 data-fee="0">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26019&amp;source=review-practice&amp;region=%EC%84%9C%EC%9A%B8"
+             title="시민 합창 공개연습 상세 보기">
+            <span class="event-thumbnail">공연</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">공연</span>
+            <h2 class="event-name">시민 합창 공개연습</h2>
+
+            <p class="organizer">
+              주최: <strong>도시문화재단</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-28T14:00:00">2026-08-28 14:00</time>
+              <span class="end-time">~ 16:30</span>
+            </p>
+
+            <p class="event-location">온라인 스트리밍</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">무료</span>
+              <span class="event-rating">평점 4.6</span>
+              <span class="applicant-count">신청 113명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26020"
+                 data-region="부산"
+                 data-capacity="126"
+                 data-fee="5000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26020&amp;source=review-practice&amp;region=%EB%B6%80%EC%82%B0"
+             title="반려식물 관리 워크숍 상세 보기">
+            <span class="event-thumbnail">전시</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">전시</span>
+            <h2 class="event-name">반려식물 관리 워크숍</h2>
+
+            <p class="organizer">
+              주최: <strong>생활예술센터</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-29T16:00:00">2026-08-29 16:00</time>
+              <span class="end-time">~ 19:00</span>
+            </p>
+
+            <p class="event-location">부산 아트스페이스 2관</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">5,000원</span>
+              <span class="event-rating">평점 4.3</span>
+              <span class="applicant-count">신청 126명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26021"
+                 data-region="대전"
+                 data-capacity="139"
+                 data-fee="10000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26021&amp;source=review-practice&amp;region=%EB%8C%80%EC%A0%84"
+             title="독립출판 마켓 상세 보기">
+            <span class="event-thumbnail">체험</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">체험</span>
+            <h2 class="event-name">독립출판 마켓</h2>
+
+            <p class="organizer">
+              주최: <strong>청년문화기획단</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-30T10:00:00">2026-08-30 10:00</time>
+              <span class="end-time">~ 11:30</span>
+            </p>
+
+            <p class="event-location">대전 생활문화센터</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">10,000원</span>
+              <span class="event-rating">평점 4.0</span>
+              <span class="applicant-count">신청 139명</span>
+            </div>
+
+            <span class="registration-status waiting">
+              대기접수
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card recommended"
+                 data-event-no="EVT-26022"
+                 data-region="광주"
+                 data-capacity="152"
+                 data-fee="15000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26022&amp;source=review-practice&amp;region=%EA%B4%91%EC%A3%BC"
+             title="미디어아트 체험전 상세 보기">
+            <span class="event-thumbnail">강연</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">강연</span>
+            <h2 class="event-name">미디어아트 체험전</h2>
+
+            <p class="organizer">
+              주최: <strong>지역창작소</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-08-31T12:00:00">2026-08-31 12:00</time>
+              <span class="end-time">~ 14:00</span>
+            </p>
+
+            <p class="event-location">광주 도시기록관</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">15,000원</span>
+              <span class="event-rating">평점 4.7</span>
+              <span class="applicant-count">신청 37명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card online-event"
+                 data-event-no="EVT-26023"
+                 data-region="인천"
+                 data-capacity="165"
+                 data-fee="20000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26023&amp;source=review-practice&amp;region=%EC%9D%B8%EC%B2%9C"
+             title="여행 글쓰기 강연 상세 보기">
+            <span class="event-thumbnail">축제</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">축제</span>
+            <h2 class="event-name">여행 글쓰기 강연</h2>
+
+            <p class="organizer">
+              주최: <strong>시민교육협회</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-09-01T14:00:00">2026-09-01 14:00</time>
+              <span class="end-time">~ 16:30</span>
+            </p>
+
+            <p class="event-location">온라인 스트리밍</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">20,000원</span>
+              <span class="event-rating">평점 4.4</span>
+              <span class="applicant-count">신청 56명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26024"
+                 data-region="수원"
+                 data-capacity="178"
+                 data-fee="30000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26024&amp;source=review-practice&amp;region=%EC%88%98%EC%9B%90"
+             title="지역 역사 탐방 상세 보기">
+            <span class="event-thumbnail">워크숍</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">워크숍</span>
+            <h2 class="event-name">지역 역사 탐방</h2>
+
+            <p class="organizer">
+              주최: <strong>문화공간 라운드</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-09-02T16:00:00">2026-09-02 16:00</time>
+              <span class="end-time">~ 19:00</span>
+            </p>
+
+            <p class="event-location">수원 창작스튜디오</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">30,000원</span>
+              <span class="event-rating">평점 4.1</span>
+              <span class="applicant-count">신청 178명</span>
+            </div>
+
+            <span class="registration-status closed">
+              신청마감
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26025"
+                 data-region="서울"
+                 data-capacity="191"
+                 data-fee="0">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26025&amp;source=review-practice&amp;region=%EC%84%9C%EC%9A%B8"
+             title="수채화 원데이 클래스 상세 보기">
+            <span class="event-thumbnail">공연</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">공연</span>
+            <h2 class="event-name">수채화 원데이 클래스</h2>
+
+            <p class="organizer">
+              주최: <strong>도시문화재단</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-09-03T10:00:00">2026-09-03 10:00</time>
+              <span class="end-time">~ 11:30</span>
+            </p>
+
+            <p class="event-location">서울 시민문화홀</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">무료</span>
+              <span class="event-rating">평점 4.8</span>
+              <span class="applicant-count">신청 94명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card recommended"
+                 data-event-no="EVT-26026"
+                 data-region="부산"
+                 data-capacity="43"
+                 data-fee="5000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26026&amp;source=review-practice&amp;region=%EB%B6%80%EC%82%B0"
+             title="야외 영화음악 공연 상세 보기">
+            <span class="event-thumbnail">전시</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">전시</span>
+            <h2 class="event-name">야외 영화음악 공연</h2>
+
+            <p class="organizer">
+              주최: <strong>생활예술센터</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-09-04T12:00:00">2026-09-04 12:00</time>
+              <span class="end-time">~ 14:00</span>
+            </p>
+
+            <p class="event-location">부산 아트스페이스 2관</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">5,000원</span>
+              <span class="event-rating">평점 4.5</span>
+              <span class="applicant-count">신청 43명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26027"
+                 data-region="대전"
+                 data-capacity="56"
+                 data-fee="10000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26027&amp;source=review-practice&amp;region=%EB%8C%80%EC%A0%84"
+             title="환경 다큐 상영회 상세 보기">
+            <span class="event-thumbnail">체험</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">체험</span>
+            <h2 class="event-name">환경 다큐 상영회</h2>
+
+            <p class="organizer">
+              주최: <strong>청년문화기획단</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-09-05T14:00:00">2026-09-05 14:00</time>
+              <span class="end-time">~ 16:30</span>
+            </p>
+
+            <p class="event-location">대전 생활문화센터</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">10,000원</span>
+              <span class="event-rating">평점 4.2</span>
+              <span class="applicant-count">신청 56명</span>
+            </div>
+
+            <span class="registration-status waiting">
+              대기접수
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26028"
+                 data-region="광주"
+                 data-capacity="69"
+                 data-fee="15000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26028&amp;source=review-practice&amp;region=%EA%B4%91%EC%A3%BC"
+             title="전통시장 문화축제 상세 보기">
+            <span class="event-thumbnail">강연</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">강연</span>
+            <h2 class="event-name">전통시장 문화축제</h2>
+
+            <p class="organizer">
+              주최: <strong>지역창작소</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-09-06T16:00:00">2026-09-06 16:00</time>
+              <span class="end-time">~ 19:00</span>
+            </p>
+
+            <p class="event-location">광주 도시기록관</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">15,000원</span>
+              <span class="event-rating">평점 4.9</span>
+              <span class="applicant-count">신청 69명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card online-event"
+                 data-event-no="EVT-26029"
+                 data-region="인천"
+                 data-capacity="82"
+                 data-fee="20000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26029&amp;source=review-practice&amp;region=%EC%9D%B8%EC%B2%9C"
+             title="생활 속 AI 활용 강연 상세 보기">
+            <span class="event-thumbnail">축제</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">축제</span>
+            <h2 class="event-name">생활 속 AI 활용 강연</h2>
+
+            <p class="organizer">
+              주최: <strong>시민교육협회</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-09-07T10:00:00">2026-09-07 10:00</time>
+              <span class="end-time">~ 11:30</span>
+            </p>
+
+            <p class="event-location">온라인 스트리밍</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">20,000원</span>
+              <span class="event-rating">평점 4.6</span>
+              <span class="applicant-count">신청 82명</span>
+            </div>
+
+            <span class="registration-status open">
+              신청가능
+            </span>
+          </div>
+        </article>
+        
+        <article class="event-card"
+                 data-event-no="EVT-26030"
+                 data-region="수원"
+                 data-capacity="95"
+                 data-fee="30000">
+          <a class="event-detail-link"
+             href="/culture/events/detail.html?event_id=EVT-26030&amp;source=review-practice&amp;region=%EC%88%98%EC%9B%90"
+             title="가죽 소품 제작 워크숍 상세 보기">
+            <span class="event-thumbnail">워크숍</span>
+          </a>
+
+          <div class="event-content">
+            <span class="event-category">워크숍</span>
+            <h2 class="event-name">가죽 소품 제작 워크숍</h2>
+
+            <p class="organizer">
+              주최: <strong>문화공간 라운드</strong>
+            </p>
+
+            <p class="event-schedule">
+              <time datetime="2026-09-08T12:00:00">2026-09-08 12:00</time>
+              <span class="end-time">~ 14:00</span>
+            </p>
+
+            <p class="event-location">수원 창작스튜디오</p>
+
+            <div class="event-metrics">
+              <span class="participation-fee">30,000원</span>
+              <span class="event-rating">평점 4.3</span>
+              <span class="applicant-count">신청 95명</span>
+            </div>
+
+            <span class="registration-status closed">
+              신청마감
+            </span>
+          </div>
+        </article>
+        
+    </section>
+
+    <section class="notice-section">
+      <h2>신청 유의사항</h2>
+
+      <table class="notice-table">
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>안내내용</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>취소</td><td>행사 시작 24시간 전까지 가능합니다.</td></tr>
+          <tr><td>대기</td><td>취소자가 발생하면 신청 순서대로 전환됩니다.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="table-section">
+      <h2>전체 행사 일정표</h2>
+
+      <table class="event-summary-table">
+        <thead>
+          <tr>
+            <th>행사번호</th>
+            <th>행사명</th>
+            <th>지역</th>
+            <th>분야</th>
+            <th>시작일시</th>
+            <th>참가비</th>
+            <th>신청상태</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          
+        <tr>
+          <td>EVT-26001</td>
+          <td>도심 야간 재즈 콘서트</td>
+          <td>서울</td>
+          <td>공연</td>
+          <td>2026-08-10 10:00</td>
+          <td>무료</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26002</td>
+          <td>현대 일러스트 특별전</td>
+          <td>부산</td>
+          <td>전시</td>
+          <td>2026-08-11 12:00</td>
+          <td>5,000원</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26003</td>
+          <td>가족 도예 체험교실</td>
+          <td>대전</td>
+          <td>체험</td>
+          <td>2026-08-12 14:00</td>
+          <td>10,000원</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26004</td>
+          <td>데이터로 읽는 도시 이야기</td>
+          <td>광주</td>
+          <td>강연</td>
+          <td>2026-08-13 16:00</td>
+          <td>15,000원</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26005</td>
+          <td>여름 골목문화 축제</td>
+          <td>인천</td>
+          <td>축제</td>
+          <td>2026-08-14 10:00</td>
+          <td>20,000원</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26006</td>
+          <td>초보자를 위한 사진 워크숍</td>
+          <td>수원</td>
+          <td>워크숍</td>
+          <td>2026-08-15 12:00</td>
+          <td>30,000원</td>
+          <td>신청마감</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26007</td>
+          <td>독립영화 감독과의 대화</td>
+          <td>서울</td>
+          <td>공연</td>
+          <td>2026-08-16 14:00</td>
+          <td>무료</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26008</td>
+          <td>전통 매듭 공예 체험</td>
+          <td>부산</td>
+          <td>전시</td>
+          <td>2026-08-17 16:00</td>
+          <td>5,000원</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26009</td>
+          <td>지역 작가 북토크</td>
+          <td>대전</td>
+          <td>체험</td>
+          <td>2026-08-18 10:00</td>
+          <td>10,000원</td>
+          <td>대기접수</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26010</td>
+          <td>어린이 과학 놀이터</td>
+          <td>광주</td>
+          <td>강연</td>
+          <td>2026-08-19 12:00</td>
+          <td>15,000원</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26011</td>
+          <td>퇴근길 클래식 살롱</td>
+          <td>인천</td>
+          <td>축제</td>
+          <td>2026-08-20 14:00</td>
+          <td>20,000원</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26012</td>
+          <td>업사이클링 생활소품 만들기</td>
+          <td>수원</td>
+          <td>워크숍</td>
+          <td>2026-08-21 16:00</td>
+          <td>30,000원</td>
+          <td>신청마감</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26013</td>
+          <td>로컬 브랜드 창업 강연</td>
+          <td>서울</td>
+          <td>공연</td>
+          <td>2026-08-22 10:00</td>
+          <td>무료</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26014</td>
+          <td>한여름 거리 퍼레이드</td>
+          <td>부산</td>
+          <td>전시</td>
+          <td>2026-08-23 12:00</td>
+          <td>5,000원</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26015</td>
+          <td>스마트폰 영상 제작교실</td>
+          <td>대전</td>
+          <td>체험</td>
+          <td>2026-08-24 14:00</td>
+          <td>10,000원</td>
+          <td>대기접수</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26016</td>
+          <td>도시 건축 사진전</td>
+          <td>광주</td>
+          <td>강연</td>
+          <td>2026-08-25 16:00</td>
+          <td>15,000원</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26017</td>
+          <td>청소년 코딩 문화캠프</td>
+          <td>인천</td>
+          <td>축제</td>
+          <td>2026-08-26 10:00</td>
+          <td>20,000원</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26018</td>
+          <td>세계음식 문화체험</td>
+          <td>수원</td>
+          <td>워크숍</td>
+          <td>2026-08-27 12:00</td>
+          <td>30,000원</td>
+          <td>신청마감</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26019</td>
+          <td>시민 합창 공개연습</td>
+          <td>서울</td>
+          <td>공연</td>
+          <td>2026-08-28 14:00</td>
+          <td>무료</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26020</td>
+          <td>반려식물 관리 워크숍</td>
+          <td>부산</td>
+          <td>전시</td>
+          <td>2026-08-29 16:00</td>
+          <td>5,000원</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26021</td>
+          <td>독립출판 마켓</td>
+          <td>대전</td>
+          <td>체험</td>
+          <td>2026-08-30 10:00</td>
+          <td>10,000원</td>
+          <td>대기접수</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26022</td>
+          <td>미디어아트 체험전</td>
+          <td>광주</td>
+          <td>강연</td>
+          <td>2026-08-31 12:00</td>
+          <td>15,000원</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26023</td>
+          <td>여행 글쓰기 강연</td>
+          <td>인천</td>
+          <td>축제</td>
+          <td>2026-09-01 14:00</td>
+          <td>20,000원</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26024</td>
+          <td>지역 역사 탐방</td>
+          <td>수원</td>
+          <td>워크숍</td>
+          <td>2026-09-02 16:00</td>
+          <td>30,000원</td>
+          <td>신청마감</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26025</td>
+          <td>수채화 원데이 클래스</td>
+          <td>서울</td>
+          <td>공연</td>
+          <td>2026-09-03 10:00</td>
+          <td>무료</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26026</td>
+          <td>야외 영화음악 공연</td>
+          <td>부산</td>
+          <td>전시</td>
+          <td>2026-09-04 12:00</td>
+          <td>5,000원</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26027</td>
+          <td>환경 다큐 상영회</td>
+          <td>대전</td>
+          <td>체험</td>
+          <td>2026-09-05 14:00</td>
+          <td>10,000원</td>
+          <td>대기접수</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26028</td>
+          <td>전통시장 문화축제</td>
+          <td>광주</td>
+          <td>강연</td>
+          <td>2026-09-06 16:00</td>
+          <td>15,000원</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26029</td>
+          <td>생활 속 AI 활용 강연</td>
+          <td>인천</td>
+          <td>축제</td>
+          <td>2026-09-07 10:00</td>
+          <td>20,000원</td>
+          <td>신청가능</td>
+        </tr>
+        
+        <tr>
+          <td>EVT-26030</td>
+          <td>가죽 소품 제작 워크숍</td>
+          <td>수원</td>
+          <td>워크숍</td>
+          <td>2026-09-08 12:00</td>
+          <td>30,000원</td>
+          <td>신청마감</td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>BeautifulSoup·requests 복습용 지역 문화행사 페이지</p>
+  </footer>
+</body>
+</html>

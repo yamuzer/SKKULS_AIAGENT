@@ -1,0 +1,11 @@
+{
+  "database": "global_customer_support",
+  "schema": "customer_quality",
+  "tables": {
+    "customer_inquiry_raw": 72,
+    "customer_inquiry_standardized": 72,
+    "customer_inquiry_valid": 63,
+    "customer_inquiry_invalid": 9,
+    "customer_inquiry_quality_issue": 9
+  }
+}

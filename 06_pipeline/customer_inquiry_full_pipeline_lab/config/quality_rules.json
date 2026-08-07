@@ -1,0 +1,69 @@
+{
+  "required_fields": [
+    {
+      "column": "source_inquiry_id",
+      "rule_code": "REQUIRED_SOURCE_INQUIRY_ID",
+      "message": "원천 문의번호는 필수입니다."
+    },
+    {
+      "column": "author_name",
+      "rule_code": "REQUIRED_AUTHOR_NAME",
+      "message": "작성자명은 필수입니다."
+    },
+    {
+      "column": "posted_at",
+      "rule_code": "REQUIRED_POSTED_AT",
+      "message": "작성일시는 유효한 날짜여야 합니다."
+    },
+    {
+      "column": "inquiry_type_code",
+      "rule_code": "REQUIRED_INQUIRY_TYPE",
+      "message": "문의유형은 기준정보에 존재해야 합니다."
+    },
+    {
+      "column": "priority_code",
+      "rule_code": "REQUIRED_PRIORITY",
+      "message": "우선순위는 기준정보에 존재해야 합니다."
+    },
+    {
+      "column": "answer_status_code",
+      "rule_code": "REQUIRED_ANSWER_STATUS",
+      "message": "답변상태는 기준정보에 존재해야 합니다."
+    },
+    {
+      "column": "country_code",
+      "rule_code": "REQUIRED_COUNTRY",
+      "message": "국가명은 기준정보에 존재해야 합니다."
+    },
+    {
+      "column": "inquiry_title",
+      "rule_code": "REQUIRED_INQUIRY_TITLE",
+      "message": "문의 제목은 필수입니다."
+    },
+    {
+      "column": "inquiry_text",
+      "rule_code": "REQUIRED_INQUIRY_TEXT",
+      "message": "문의 본문은 필수입니다."
+    }
+  ],
+  "duplicate_key": "source_inquiry_id",
+  "conditional_product_rule": {
+    "exempt_inquiry_type_codes": [
+      "ACCOUNT"
+    ],
+    "required_columns": [
+      "product_code",
+      "product_name"
+    ],
+    "rule_code": "REQUIRED_PRODUCT_FOR_INQUIRY_TYPE",
+    "message": "계정 문의가 아닌 경우 상품코드와 상품명이 필요합니다."
+  },
+  "language_country_rule": {
+    "rule_code": "LANGUAGE_COUNTRY_MISMATCH",
+    "message": "원천 언어코드가 국가 기준정보의 기본 언어와 일치하지 않습니다."
+  },
+  "product_name_rule": {
+    "rule_code": "PRODUCT_NAME_MISMATCH",
+    "message": "상품코드와 상품명이 상품 기준정보와 일치하지 않습니다."
+  }
+}

@@ -1,0 +1,10 @@
+﻿source_row_number,source_inquiry_id,rule_code,column_name,invalid_value,error_message
+15,WEB-00015,REQUIRED_AUTHOR_NAME,author_name,,작성자명은 필수입니다.
+22,WEB-00022,REQUIRED_POSTED_AT,posted_at,,작성일시는 유효한 날짜여야 합니다.
+29,WEB-00029,REQUIRED_INQUIRY_TYPE,inquiry_type_code,,문의유형은 기준정보에 존재해야 합니다.
+35,WEB-00035,DUPLICATE_SOURCE_INQUIRY_ID,source_inquiry_id,WEB-00035,원천 문의번호가 중복되었습니다.
+36,WEB-00035,DUPLICATE_SOURCE_INQUIRY_ID,source_inquiry_id,WEB-00035,원천 문의번호가 중복되었습니다.
+50,WEB-00050,REQUIRED_INQUIRY_TITLE,inquiry_title,,문의 제목은 필수입니다.
+58,WEB-00058,REQUIRED_INQUIRY_TEXT,inquiry_text,,문의 본문은 필수입니다.
+64,WEB-00064,REQUIRED_COUNTRY,country_code,,국가명은 기준정보에 존재해야 합니다.
+69,WEB-00069,REQUIRED_PRIORITY,priority_code,,우선순위는 기준정보에 존재해야 합니다.

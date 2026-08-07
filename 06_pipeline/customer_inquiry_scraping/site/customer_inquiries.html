@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Customer Support 고객 문의 게시판</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 32px;
+            background: #f4f6f8;
+            color: #20242a;
+            font-family: Arial, "Malgun Gothic", sans-serif;
+        }
+        .page-header, .inquiry-list {
+            max-width: 1180px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .page-header { margin-bottom: 24px; }
+        .page-header p { color: #65707d; }
+        .inquiry-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .inquiry-card {
+            padding: 20px;
+            border: 1px solid #d9e0e7;
+            border-radius: 14px;
+            background: #ffffff;
+        }
+        .inquiry-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .inquiry-header span {
+            padding: 5px 9px;
+            border-radius: 999px;
+            background: #eef2ff;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .inquiry-title {
+            margin: 16px 0;
+            font-size: 19px;
+        }
+        .inquiry-meta {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .inquiry-meta div {
+            display: flex;
+            gap: 7px;
+            font-size: 13px;
+        }
+        .inquiry-meta strong { color: #6b7280; }
+        .inquiry-text {
+            min-height: 52px;
+            line-height: 1.65;
+            color: #374151;
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <h1>Global Customer Support 고객 문의 게시판</h1>
+        <p>15단계 정적 웹페이지 크롤링 실습용 데이터입니다. 총 72건입니다.</p>
+    </header>
+
+    <main class="inquiry-list">
+        
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00001">
+        <header class="inquiry-header">
+            <span class="inquiry-type">delivery</span>
+            <span class="priority">LOW</span>
+            <span class="answer-status">waiting</span>
+        </header>
+
+        <h2 class="inquiry-title">배송 조회가 되지 않습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">김민준</span></div>
+            <div><strong>국가</strong><span class="country-name">South Korea</span></div>
+            <div><strong>언어</strong><span class="language-code">ko</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-06-01 09:00</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 워치 A1</span></div>
+        </div>
+
+        <p class="inquiry-text">배송 상태가 준비 중으로만 표시됩니다. 현재 위치를 확인해 주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00002">
+        <header class="inquiry-header">
+            <span class="inquiry-type">Delivery</span>
+            <span class="priority">Low</span>
+            <span class="answer-status">answered</span>
+        </header>
+
+        <h2 class="inquiry-title">배송 조회가 되지 않습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">이서연</span></div>
+            <div><strong>국가</strong><span class="country-name">Korea, Rep.</span></div>
+            <div><strong>언어</strong><span class="language-code">ko-KR</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/06/02 12:13</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1002</span></div>
+            <div><strong>상품명</strong><span class="product-name">무선 이어폰 B2</span></div>
+        </div>
+
+        <p class="inquiry-text">배송 상태가 준비 중으로만 표시됩니다. 현재 위치를 확인해 주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00003">
+        <header class="inquiry-header">
+            <span class="inquiry-type">payment</span>
+            <span class="priority">MEDIUM</span>
+            <span class="answer-status">in_progress</span>
+        </header>
+
+        <h2 class="inquiry-title">결제가 두 번 처리되었습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">박지훈</span></div>
+            <div><strong>국가</strong><span class="country-name">United States</span></div>
+            <div><strong>언어</strong><span class="language-code">en</span></div>
+            <div><strong>작성일</strong><time class="posted-at">03-06-2026 15:26</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-2001</span></div>
+            <div><strong>상품명</strong><span class="product-name">태블릿 C10</span></div>
+        </div>
+
+        <p class="inquiry-text">해외에서 발급한 카드로 결제할 때 승인 실패 메시지가 반복됩니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00004">
+        <header class="inquiry-header">
+            <span class="inquiry-type">PAYMENT</span>
+            <span class="priority">Medium</span>
+            <span class="answer-status">답변대기</span>
+        </header>
+
+        <h2 class="inquiry-title">해외 카드 결제가 실패합니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">최유진</span></div>
+            <div><strong>국가</strong><span class="country-name">U.S.A.</span></div>
+            <div><strong>언어</strong><span class="language-code">en-US</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.06.04 18:39</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-3001</span></div>
+            <div><strong>상품명</strong><span class="product-name">휴대용 충전기 P5</span></div>
+        </div>
+
+        <p class="inquiry-text">해외에서 발급한 카드로 결제할 때 승인 실패 메시지가 반복됩니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00005">
+        <header class="inquiry-header">
+            <span class="inquiry-type">return</span>
+            <span class="priority">HIGH</span>
+            <span class="answer-status">답변완료</span>
+        </header>
+
+        <h2 class="inquiry-title">환불이 아직 처리되지 않았습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">정도현</span></div>
+            <div><strong>국가</strong><span class="country-name">Japan</span></div>
+            <div><strong>언어</strong><span class="language-code">ja</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-06-05 11:52</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-4001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 홈 허브 H1</span></div>
+        </div>
+
+        <p class="inquiry-text">반품 접수 후 회수 일정이 잡히지 않았습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00006">
+        <header class="inquiry-header">
+            <span class="inquiry-type">exchange</span>
+            <span class="priority">Urgent</span>
+            <span class="answer-status">waiting</span>
+        </header>
+
+        <h2 class="inquiry-title">색상을 잘못 선택했습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">한지민</span></div>
+            <div><strong>국가</strong><span class="country-name">Deutschland</span></div>
+            <div><strong>언어</strong><span class="language-code">de</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/06/06 14:05</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-5001</span></div>
+            <div><strong>상품명</strong><span class="product-name">기계식 키보드 K8</span></div>
+        </div>
+
+        <p class="inquiry-text">구성품 일부가 누락되어 교환을 요청하려고 합니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00007">
+        <header class="inquiry-header">
+            <span class="inquiry-type">account</span>
+            <span class="priority">URGENT</span>
+            <span class="answer-status">answered</span>
+        </header>
+
+        <h2 class="inquiry-title">회원정보를 변경하고 싶습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">윤서준</span></div>
+            <div><strong>국가</strong><span class="country-name">France</span></div>
+            <div><strong>언어</strong><span class="language-code">fr</span></div>
+            <div><strong>작성일</strong><time class="posted-at">07-06-2026 17:18</time></div>
+            <div><strong>상품코드</strong><span class="product-code"></span></div>
+            <div><strong>상품명</strong><span class="product-name">해당 없음</span></div>
+        </div>
+
+        <p class="inquiry-text">정확한 이메일과 비밀번호를 입력해도 로그인 오류가 발생합니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00008">
+        <header class="inquiry-header">
+            <span class="inquiry-type">technical</span>
+            <span class="priority">LOW</span>
+            <span class="answer-status">in_progress</span>
+        </header>
+
+        <h2 class="inquiry-title">초기 설정 중 오류가 발생합니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">장예린</span></div>
+            <div><strong>국가</strong><span class="country-name">Taiwan</span></div>
+            <div><strong>언어</strong><span class="language-code">zh-TW</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.06.08 10:31</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1002</span></div>
+            <div><strong>상품명</strong><span class="product-name">무선 이어폰 B2</span></div>
+        </div>
+
+        <p class="inquiry-text">제품은 검색되지만 연결 버튼을 누르면 실패합니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00009">
+        <header class="inquiry-header">
+            <span class="inquiry-type">product_quality</span>
+            <span class="priority">Low</span>
+            <span class="answer-status">답변대기</span>
+        </header>
+
+        <h2 class="inquiry-title">포장 상태가 좋지 않았습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">오현우</span></div>
+            <div><strong>국가</strong><span class="country-name">Singapore</span></div>
+            <div><strong>언어</strong><span class="language-code">en-SG</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-06-09 13:44</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-2001</span></div>
+            <div><strong>상품명</strong><span class="product-name">태블릿 C10</span></div>
+        </div>
+
+        <p class="inquiry-text">완전히 충전해도 사용 시간이 설명서보다 매우 짧습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00010">
+        <header class="inquiry-header">
+            <span class="inquiry-type">delivery</span>
+            <span class="priority">MEDIUM</span>
+            <span class="answer-status">답변완료</span>
+        </header>
+
+        <h2 class="inquiry-title">배송 조회가 되지 않습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">임수빈</span></div>
+            <div><strong>국가</strong><span class="country-name">Canada</span></div>
+            <div><strong>언어</strong><span class="language-code">en-CA</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/06/10 16:57</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-3001</span></div>
+            <div><strong>상품명</strong><span class="product-name">휴대용 충전기 P5</span></div>
+        </div>
+
+        <p class="inquiry-text">안내받은 도착 예정일이 지났지만 상품을 받지 못했습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00011">
+        <header class="inquiry-header">
+            <span class="inquiry-type">Delivery</span>
+            <span class="priority">Medium</span>
+            <span class="answer-status">waiting</span>
+        </header>
+
+        <h2 class="inquiry-title">배송 조회가 되지 않습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">조민재</span></div>
+            <div><strong>국가</strong><span class="country-name">South Korea</span></div>
+            <div><strong>언어</strong><span class="language-code">ko</span></div>
+            <div><strong>작성일</strong><time class="posted-at">11-06-2026 09:10</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-4001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 홈 허브 H1</span></div>
+        </div>
+
+        <p class="inquiry-text">이사로 인해 기존 주소에서 새로운 주소로 배송지를 변경하고 싶습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00012">
+        <header class="inquiry-header">
+            <span class="inquiry-type">payment</span>
+            <span class="priority">HIGH</span>
+            <span class="answer-status">answered</span>
+        </header>
+
+        <h2 class="inquiry-title">결제가 두 번 처리되었습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">송하윤</span></div>
+            <div><strong>국가</strong><span class="country-name">Korea, Rep.</span></div>
+            <div><strong>언어</strong><span class="language-code">ko-KR</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.06.12 12:23</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-5001</span></div>
+            <div><strong>상품명</strong><span class="product-name">기계식 키보드 K8</span></div>
+        </div>
+
+        <p class="inquiry-text">회사 제출용 영수증이 필요합니다. 주문번호가 포함된 영수증을 다시 보내주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00013">
+        <header class="inquiry-header">
+            <span class="inquiry-type">PAYMENT</span>
+            <span class="priority">Urgent</span>
+            <span class="answer-status">in_progress</span>
+        </header>
+
+        <h2 class="inquiry-title">해외 카드 결제가 실패합니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Alex Morgan</span></div>
+            <div><strong>국가</strong><span class="country-name">United States</span></div>
+            <div><strong>언어</strong><span class="language-code">en</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-06-13 15:36</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 워치 A1</span></div>
+        </div>
+
+        <p class="inquiry-text">같은 주문이 두 번 승인된 것으로 보입니다. 중복 결제를 확인해 주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00014">
+        <header class="inquiry-header">
+            <span class="inquiry-type">return</span>
+            <span class="priority">URGENT</span>
+            <span class="answer-status">답변대기</span>
+        </header>
+
+        <h2 class="inquiry-title">환불이 아직 처리되지 않았습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Emma Wilson</span></div>
+            <div><strong>국가</strong><span class="country-name">U.S.A.</span></div>
+            <div><strong>언어</strong><span class="language-code">en-US</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/06/14 18:49</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1002</span></div>
+            <div><strong>상품명</strong><span class="product-name">무선 이어폰 B2</span></div>
+        </div>
+
+        <p class="inquiry-text">상품을 사용하지 않았습니다. 반품 방법과 배송비를 알려주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00015">
+        <header class="inquiry-header">
+            <span class="inquiry-type">exchange</span>
+            <span class="priority">LOW</span>
+            <span class="answer-status">답변완료</span>
+        </header>
+
+        <h2 class="inquiry-title">색상을 잘못 선택했습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name"></span></div>
+            <div><strong>국가</strong><span class="country-name">Japan</span></div>
+            <div><strong>언어</strong><span class="language-code">ja</span></div>
+            <div><strong>작성일</strong><time class="posted-at">15-06-2026 11:02</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-2001</span></div>
+            <div><strong>상품명</strong><span class="product-name">태블릿 C10</span></div>
+        </div>
+
+        <p class="inquiry-text">교환 신청은 완료했는데 새 상품 배송 현황을 확인할 수 없습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00016">
+        <header class="inquiry-header">
+            <span class="inquiry-type">account</span>
+            <span class="priority">Low</span>
+            <span class="answer-status">waiting</span>
+        </header>
+
+        <h2 class="inquiry-title">회원정보를 변경하고 싶습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Sofia Rossi</span></div>
+            <div><strong>국가</strong><span class="country-name">Deutschland</span></div>
+            <div><strong>언어</strong><span class="language-code">de</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.06.16 14:15</time></div>
+            <div><strong>상품코드</strong><span class="product-code"></span></div>
+            <div><strong>상품명</strong><span class="product-name">해당 없음</span></div>
+        </div>
+
+        <p class="inquiry-text">비밀번호 찾기를 여러 번 시도했지만 재설정 메일을 받지 못했습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00017">
+        <header class="inquiry-header">
+            <span class="inquiry-type">technical</span>
+            <span class="priority">MEDIUM</span>
+            <span class="answer-status">answered</span>
+        </header>
+
+        <h2 class="inquiry-title">초기 설정 중 오류가 발생합니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Haruto Sato</span></div>
+            <div><strong>국가</strong><span class="country-name">France</span></div>
+            <div><strong>언어</strong><span class="language-code">fr</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-06-17 17:28</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-4001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 홈 허브 H1</span></div>
+        </div>
+
+        <p class="inquiry-text">초기 설정 중 인증 코드 단계에서 알 수 없는 오류가 표시됩니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00018">
+        <header class="inquiry-header">
+            <span class="inquiry-type">product_quality</span>
+            <span class="priority">Medium</span>
+            <span class="answer-status">in_progress</span>
+        </header>
+
+        <h2 class="inquiry-title">포장 상태가 좋지 않았습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Mei Lin</span></div>
+            <div><strong>국가</strong><span class="country-name">Taiwan</span></div>
+            <div><strong>언어</strong><span class="language-code">zh-TW</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/06/18 10:41</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-5001</span></div>
+            <div><strong>상품명</strong><span class="product-name">기계식 키보드 K8</span></div>
+        </div>
+
+        <p class="inquiry-text">외부 상자와 내부 완충재가 일부 손상되어 있었습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00019">
+        <header class="inquiry-header">
+            <span class="inquiry-type">delivery</span>
+            <span class="priority">HIGH</span>
+            <span class="answer-status">답변대기</span>
+        </header>
+
+        <h2 class="inquiry-title">배송 조회가 되지 않습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Lena Müller</span></div>
+            <div><strong>국가</strong><span class="country-name">Singapore</span></div>
+            <div><strong>언어</strong><span class="language-code">en-SG</span></div>
+            <div><strong>작성일</strong><time class="posted-at">19-06-2026 13:54</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 워치 A1</span></div>
+        </div>
+
+        <p class="inquiry-text">배송 상태가 준비 중으로만 표시됩니다. 현재 위치를 확인해 주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00020">
+        <header class="inquiry-header">
+            <span class="inquiry-type">Delivery</span>
+            <span class="priority">Urgent</span>
+            <span class="answer-status">답변완료</span>
+        </header>
+
+        <h2 class="inquiry-title">배송 조회가 되지 않습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Noah Brown</span></div>
+            <div><strong>국가</strong><span class="country-name">Canada</span></div>
+            <div><strong>언어</strong><span class="language-code">en-CA</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.06.20 16:07</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1002</span></div>
+            <div><strong>상품명</strong><span class="product-name">무선 이어폰 B2</span></div>
+        </div>
+
+        <p class="inquiry-text">배송 상태가 준비 중으로만 표시됩니다. 현재 위치를 확인해 주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00021">
+        <header class="inquiry-header">
+            <span class="inquiry-type">payment</span>
+            <span class="priority">URGENT</span>
+            <span class="answer-status">waiting</span>
+        </header>
+
+        <h2 class="inquiry-title">결제가 두 번 처리되었습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">김민준</span></div>
+            <div><strong>국가</strong><span class="country-name">South Korea</span></div>
+            <div><strong>언어</strong><span class="language-code">ko</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-06-21 09:20</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-2001</span></div>
+            <div><strong>상품명</strong><span class="product-name">태블릿 C10</span></div>
+        </div>
+
+        <p class="inquiry-text">해외에서 발급한 카드로 결제할 때 승인 실패 메시지가 반복됩니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00022">
+        <header class="inquiry-header">
+            <span class="inquiry-type">PAYMENT</span>
+            <span class="priority">LOW</span>
+            <span class="answer-status">answered</span>
+        </header>
+
+        <h2 class="inquiry-title">해외 카드 결제가 실패합니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">이서연</span></div>
+            <div><strong>국가</strong><span class="country-name">Korea, Rep.</span></div>
+            <div><strong>언어</strong><span class="language-code">ko-KR</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-99-42 25:61</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-3001</span></div>
+            <div><strong>상품명</strong><span class="product-name">휴대용 충전기 P5</span></div>
+        </div>
+
+        <p class="inquiry-text">해외에서 발급한 카드로 결제할 때 승인 실패 메시지가 반복됩니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00023">
+        <header class="inquiry-header">
+            <span class="inquiry-type">return</span>
+            <span class="priority">Low</span>
+            <span class="answer-status">in_progress</span>
+        </header>
+
+        <h2 class="inquiry-title">환불이 아직 처리되지 않았습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">박지훈</span></div>
+            <div><strong>국가</strong><span class="country-name">United States</span></div>
+            <div><strong>언어</strong><span class="language-code">en</span></div>
+            <div><strong>작성일</strong><time class="posted-at">23-06-2026 15:46</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-4001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 홈 허브 H1</span></div>
+        </div>
+
+        <p class="inquiry-text">반품 접수 후 회수 일정이 잡히지 않았습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00024">
+        <header class="inquiry-header">
+            <span class="inquiry-type">exchange</span>
+            <span class="priority">MEDIUM</span>
+            <span class="answer-status">답변대기</span>
+        </header>
+
+        <h2 class="inquiry-title">색상을 잘못 선택했습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">최유진</span></div>
+            <div><strong>국가</strong><span class="country-name">U.S.A.</span></div>
+            <div><strong>언어</strong><span class="language-code">en-US</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.06.24 18:59</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-5001</span></div>
+            <div><strong>상품명</strong><span class="product-name">기계식 키보드 K8</span></div>
+        </div>
+
+        <p class="inquiry-text">구성품 일부가 누락되어 교환을 요청하려고 합니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00025">
+        <header class="inquiry-header">
+            <span class="inquiry-type">account</span>
+            <span class="priority">Medium</span>
+            <span class="answer-status">답변완료</span>
+        </header>
+
+        <h2 class="inquiry-title">회원정보를 변경하고 싶습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">정도현</span></div>
+            <div><strong>국가</strong><span class="country-name">Japan</span></div>
+            <div><strong>언어</strong><span class="language-code">ja</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-06-25 11:12</time></div>
+            <div><strong>상품코드</strong><span class="product-code"></span></div>
+            <div><strong>상품명</strong><span class="product-name">해당 없음</span></div>
+        </div>
+
+        <p class="inquiry-text">정확한 이메일과 비밀번호를 입력해도 로그인 오류가 발생합니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00026">
+        <header class="inquiry-header">
+            <span class="inquiry-type">technical</span>
+            <span class="priority">HIGH</span>
+            <span class="answer-status">waiting</span>
+        </header>
+
+        <h2 class="inquiry-title">초기 설정 중 오류가 발생합니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">한지민</span></div>
+            <div><strong>국가</strong><span class="country-name">Deutschland</span></div>
+            <div><strong>언어</strong><span class="language-code">de</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/06/26 14:25</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1002</span></div>
+            <div><strong>상품명</strong><span class="product-name">무선 이어폰 B2</span></div>
+        </div>
+
+        <p class="inquiry-text">제품은 검색되지만 연결 버튼을 누르면 실패합니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00027">
+        <header class="inquiry-header">
+            <span class="inquiry-type">product_quality</span>
+            <span class="priority">Urgent</span>
+            <span class="answer-status">answered</span>
+        </header>
+
+        <h2 class="inquiry-title">포장 상태가 좋지 않았습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">윤서준</span></div>
+            <div><strong>국가</strong><span class="country-name">France</span></div>
+            <div><strong>언어</strong><span class="language-code">fr</span></div>
+            <div><strong>작성일</strong><time class="posted-at">27-06-2026 17:38</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-2001</span></div>
+            <div><strong>상품명</strong><span class="product-name">태블릿 C10</span></div>
+        </div>
+
+        <p class="inquiry-text">완전히 충전해도 사용 시간이 설명서보다 매우 짧습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00028">
+        <header class="inquiry-header">
+            <span class="inquiry-type">delivery</span>
+            <span class="priority">URGENT</span>
+            <span class="answer-status">in_progress</span>
+        </header>
+
+        <h2 class="inquiry-title">배송 조회가 되지 않습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">장예린</span></div>
+            <div><strong>국가</strong><span class="country-name">Taiwan</span></div>
+            <div><strong>언어</strong><span class="language-code">zh-TW</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.06.28 10:51</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-3001</span></div>
+            <div><strong>상품명</strong><span class="product-name">휴대용 충전기 P5</span></div>
+        </div>
+
+        <p class="inquiry-text">안내받은 도착 예정일이 지났지만 상품을 받지 못했습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00029">
+        <header class="inquiry-header">
+            <span class="inquiry-type">other_request</span>
+            <span class="priority">LOW</span>
+            <span class="answer-status">답변대기</span>
+        </header>
+
+        <h2 class="inquiry-title">배송 조회가 되지 않습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">오현우</span></div>
+            <div><strong>국가</strong><span class="country-name">Singapore</span></div>
+            <div><strong>언어</strong><span class="language-code">en-SG</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-06-29 13:04</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-4001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 홈 허브 H1</span></div>
+        </div>
+
+        <p class="inquiry-text">이사로 인해 기존 주소에서 새로운 주소로 배송지를 변경하고 싶습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00030">
+        <header class="inquiry-header">
+            <span class="inquiry-type">payment</span>
+            <span class="priority">Low</span>
+            <span class="answer-status">답변완료</span>
+        </header>
+
+        <h2 class="inquiry-title">결제가 두 번 처리되었습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">임수빈</span></div>
+            <div><strong>국가</strong><span class="country-name">Canada</span></div>
+            <div><strong>언어</strong><span class="language-code">en-CA</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/06/30 16:17</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-5001</span></div>
+            <div><strong>상품명</strong><span class="product-name">기계식 키보드 K8</span></div>
+        </div>
+
+        <p class="inquiry-text">회사 제출용 영수증이 필요합니다. 주문번호가 포함된 영수증을 다시 보내주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00031">
+        <header class="inquiry-header">
+            <span class="inquiry-type">PAYMENT</span>
+            <span class="priority">MEDIUM</span>
+            <span class="answer-status">waiting</span>
+        </header>
+
+        <h2 class="inquiry-title">해외 카드 결제가 실패합니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">조민재</span></div>
+            <div><strong>국가</strong><span class="country-name">South Korea</span></div>
+            <div><strong>언어</strong><span class="language-code">ko</span></div>
+            <div><strong>작성일</strong><time class="posted-at">01-07-2026 09:30</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 워치 A1</span></div>
+        </div>
+
+        <p class="inquiry-text">같은 주문이 두 번 승인된 것으로 보입니다. 중복 결제를 확인해 주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00032">
+        <header class="inquiry-header">
+            <span class="inquiry-type">return</span>
+            <span class="priority">Medium</span>
+            <span class="answer-status">answered</span>
+        </header>
+
+        <h2 class="inquiry-title">환불이 아직 처리되지 않았습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">송하윤</span></div>
+            <div><strong>국가</strong><span class="country-name">Korea, Rep.</span></div>
+            <div><strong>언어</strong><span class="language-code">ko-KR</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.07.02 12:43</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1002</span></div>
+            <div><strong>상품명</strong><span class="product-name">무선 이어폰 B2</span></div>
+        </div>
+
+        <p class="inquiry-text">상품을 사용하지 않았습니다. 반품 방법과 배송비를 알려주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00033">
+        <header class="inquiry-header">
+            <span class="inquiry-type">exchange</span>
+            <span class="priority">HIGH</span>
+            <span class="answer-status">in_progress</span>
+        </header>
+
+        <h2 class="inquiry-title">색상을 잘못 선택했습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Alex Morgan</span></div>
+            <div><strong>국가</strong><span class="country-name">United States</span></div>
+            <div><strong>언어</strong><span class="language-code">en</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-07-03 15:56</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-2001</span></div>
+            <div><strong>상품명</strong><span class="product-name">태블릿 C10</span></div>
+        </div>
+
+        <p class="inquiry-text">교환 신청은 완료했는데 새 상품 배송 현황을 확인할 수 없습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00034">
+        <header class="inquiry-header">
+            <span class="inquiry-type">account</span>
+            <span class="priority">Urgent</span>
+            <span class="answer-status">답변대기</span>
+        </header>
+
+        <h2 class="inquiry-title">회원정보를 변경하고 싶습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Emma Wilson</span></div>
+            <div><strong>국가</strong><span class="country-name">U.S.A.</span></div>
+            <div><strong>언어</strong><span class="language-code">en-US</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/07/04 18:09</time></div>
+            <div><strong>상품코드</strong><span class="product-code"></span></div>
+            <div><strong>상품명</strong><span class="product-name">해당 없음</span></div>
+        </div>
+
+        <p class="inquiry-text">비밀번호 찾기를 여러 번 시도했지만 재설정 메일을 받지 못했습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00035">
+        <header class="inquiry-header">
+            <span class="inquiry-type">technical</span>
+            <span class="priority">URGENT</span>
+            <span class="answer-status">답변완료</span>
+        </header>
+
+        <h2 class="inquiry-title">초기 설정 중 오류가 발생합니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Lucas Martin</span></div>
+            <div><strong>국가</strong><span class="country-name">Japan</span></div>
+            <div><strong>언어</strong><span class="language-code">ja</span></div>
+            <div><strong>작성일</strong><time class="posted-at">05-07-2026 11:22</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-4001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 홈 허브 H1</span></div>
+        </div>
+
+        <p class="inquiry-text">초기 설정 중 인증 코드 단계에서 알 수 없는 오류가 표시됩니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00035">
+        <header class="inquiry-header">
+            <span class="inquiry-type">product_quality</span>
+            <span class="priority">LOW</span>
+            <span class="answer-status">waiting</span>
+        </header>
+
+        <h2 class="inquiry-title">포장 상태가 좋지 않았습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Sofia Rossi</span></div>
+            <div><strong>국가</strong><span class="country-name">Deutschland</span></div>
+            <div><strong>언어</strong><span class="language-code">de</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.07.06 14:35</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-5001</span></div>
+            <div><strong>상품명</strong><span class="product-name">기계식 키보드 K8</span></div>
+        </div>
+
+        <p class="inquiry-text">외부 상자와 내부 완충재가 일부 손상되어 있었습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00037">
+        <header class="inquiry-header">
+            <span class="inquiry-type">delivery</span>
+            <span class="priority">Low</span>
+            <span class="answer-status">answered</span>
+        </header>
+
+        <h2 class="inquiry-title">배송 조회가 되지 않습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Haruto Sato</span></div>
+            <div><strong>국가</strong><span class="country-name">France</span></div>
+            <div><strong>언어</strong><span class="language-code">fr</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-07-07 17:48</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 워치 A1</span></div>
+        </div>
+
+        <p class="inquiry-text">배송 상태가 준비 중으로만 표시됩니다. 현재 위치를 확인해 주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00038">
+        <header class="inquiry-header">
+            <span class="inquiry-type">Delivery</span>
+            <span class="priority">MEDIUM</span>
+            <span class="answer-status">in_progress</span>
+        </header>
+
+        <h2 class="inquiry-title">배송 조회가 되지 않습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Mei Lin</span></div>
+            <div><strong>국가</strong><span class="country-name">Taiwan</span></div>
+            <div><strong>언어</strong><span class="language-code">zh-TW</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/07/08 10:01</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1002</span></div>
+            <div><strong>상품명</strong><span class="product-name">무선 이어폰 B2</span></div>
+        </div>
+
+        <p class="inquiry-text">배송 상태가 준비 중으로만 표시됩니다. 현재 위치를 확인해 주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00039">
+        <header class="inquiry-header">
+            <span class="inquiry-type">payment</span>
+            <span class="priority">Medium</span>
+            <span class="answer-status">답변대기</span>
+        </header>
+
+        <h2 class="inquiry-title">결제가 두 번 처리되었습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Lena Müller</span></div>
+            <div><strong>국가</strong><span class="country-name">Singapore</span></div>
+            <div><strong>언어</strong><span class="language-code">en-SG</span></div>
+            <div><strong>작성일</strong><time class="posted-at">09-07-2026 13:14</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-2001</span></div>
+            <div><strong>상품명</strong><span class="product-name">태블릿 C10</span></div>
+        </div>
+
+        <p class="inquiry-text">해외에서 발급한 카드로 결제할 때 승인 실패 메시지가 반복됩니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00040">
+        <header class="inquiry-header">
+            <span class="inquiry-type">PAYMENT</span>
+            <span class="priority">HIGH</span>
+            <span class="answer-status">답변완료</span>
+        </header>
+
+        <h2 class="inquiry-title">해외 카드 결제가 실패합니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Noah Brown</span></div>
+            <div><strong>국가</strong><span class="country-name">Canada</span></div>
+            <div><strong>언어</strong><span class="language-code">en-CA</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.07.10 16:27</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-3001</span></div>
+            <div><strong>상품명</strong><span class="product-name">휴대용 충전기 P5</span></div>
+        </div>
+
+        <p class="inquiry-text">해외에서 발급한 카드로 결제할 때 승인 실패 메시지가 반복됩니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00041">
+        <header class="inquiry-header">
+            <span class="inquiry-type">return</span>
+            <span class="priority">Urgent</span>
+            <span class="answer-status">waiting</span>
+        </header>
+
+        <h2 class="inquiry-title">환불이 아직 처리되지 않았습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">김민준</span></div>
+            <div><strong>국가</strong><span class="country-name">South Korea</span></div>
+            <div><strong>언어</strong><span class="language-code">ko</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-07-11 09:40</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-4001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 홈 허브 H1</span></div>
+        </div>
+
+        <p class="inquiry-text">반품 접수 후 회수 일정이 잡히지 않았습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00042">
+        <header class="inquiry-header">
+            <span class="inquiry-type">exchange</span>
+            <span class="priority">URGENT</span>
+            <span class="answer-status">answered</span>
+        </header>
+
+        <h2 class="inquiry-title">색상을 잘못 선택했습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">이서연</span></div>
+            <div><strong>국가</strong><span class="country-name">Korea, Rep.</span></div>
+            <div><strong>언어</strong><span class="language-code">ko-KR</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/07/12 12:53</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-5001</span></div>
+            <div><strong>상품명</strong><span class="product-name">기계식 키보드 K8</span></div>
+        </div>
+
+        <p class="inquiry-text">구성품 일부가 누락되어 교환을 요청하려고 합니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00043">
+        <header class="inquiry-header">
+            <span class="inquiry-type">account</span>
+            <span class="priority">LOW</span>
+            <span class="answer-status">in_progress</span>
+        </header>
+
+        <h2 class="inquiry-title">회원정보를 변경하고 싶습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">박지훈</span></div>
+            <div><strong>국가</strong><span class="country-name">United States</span></div>
+            <div><strong>언어</strong><span class="language-code">en</span></div>
+            <div><strong>작성일</strong><time class="posted-at">13-07-2026 15:06</time></div>
+            <div><strong>상품코드</strong><span class="product-code"></span></div>
+            <div><strong>상품명</strong><span class="product-name">해당 없음</span></div>
+        </div>
+
+        <p class="inquiry-text">정확한 이메일과 비밀번호를 입력해도 로그인 오류가 발생합니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00044">
+        <header class="inquiry-header">
+            <span class="inquiry-type">technical</span>
+            <span class="priority">Low</span>
+            <span class="answer-status">답변대기</span>
+        </header>
+
+        <h2 class="inquiry-title">초기 설정 중 오류가 발생합니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">최유진</span></div>
+            <div><strong>국가</strong><span class="country-name">U.S.A.</span></div>
+            <div><strong>언어</strong><span class="language-code">en-US</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.07.14 18:19</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1002</span></div>
+            <div><strong>상품명</strong><span class="product-name">무선 이어폰 B2</span></div>
+        </div>
+
+        <p class="inquiry-text">제품은 검색되지만 연결 버튼을 누르면 실패합니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00045">
+        <header class="inquiry-header">
+            <span class="inquiry-type">product_quality</span>
+            <span class="priority">MEDIUM</span>
+            <span class="answer-status">답변완료</span>
+        </header>
+
+        <h2 class="inquiry-title">포장 상태가 좋지 않았습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">정도현</span></div>
+            <div><strong>국가</strong><span class="country-name">Japan</span></div>
+            <div><strong>언어</strong><span class="language-code">ja</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-07-15 11:32</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-2001</span></div>
+            <div><strong>상품명</strong><span class="product-name">태블릿 C10</span></div>
+        </div>
+
+        <p class="inquiry-text">완전히 충전해도 사용 시간이 설명서보다 매우 짧습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00046">
+        <header class="inquiry-header">
+            <span class="inquiry-type">delivery</span>
+            <span class="priority">Medium</span>
+            <span class="answer-status">waiting</span>
+        </header>
+
+        <h2 class="inquiry-title">배송 조회가 되지 않습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">한지민</span></div>
+            <div><strong>국가</strong><span class="country-name">Deutschland</span></div>
+            <div><strong>언어</strong><span class="language-code">de</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/07/16 14:45</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-3001</span></div>
+            <div><strong>상품명</strong><span class="product-name">휴대용 충전기 P5</span></div>
+        </div>
+
+        <p class="inquiry-text">안내받은 도착 예정일이 지났지만 상품을 받지 못했습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00047">
+        <header class="inquiry-header">
+            <span class="inquiry-type">Delivery</span>
+            <span class="priority">HIGH</span>
+            <span class="answer-status">answered</span>
+        </header>
+
+        <h2 class="inquiry-title">배송 조회가 되지 않습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">윤서준</span></div>
+            <div><strong>국가</strong><span class="country-name">France</span></div>
+            <div><strong>언어</strong><span class="language-code">fr</span></div>
+            <div><strong>작성일</strong><time class="posted-at">17-07-2026 17:58</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-4001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 홈 허브 H1</span></div>
+        </div>
+
+        <p class="inquiry-text">이사로 인해 기존 주소에서 새로운 주소로 배송지를 변경하고 싶습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00048">
+        <header class="inquiry-header">
+            <span class="inquiry-type">payment</span>
+            <span class="priority">Urgent</span>
+            <span class="answer-status">in_progress</span>
+        </header>
+
+        <h2 class="inquiry-title">결제가 두 번 처리되었습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">장예린</span></div>
+            <div><strong>국가</strong><span class="country-name">Taiwan</span></div>
+            <div><strong>언어</strong><span class="language-code">zh-TW</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.07.18 10:11</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-5001</span></div>
+            <div><strong>상품명</strong><span class="product-name">기계식 키보드 K8</span></div>
+        </div>
+
+        <p class="inquiry-text">회사 제출용 영수증이 필요합니다. 주문번호가 포함된 영수증을 다시 보내주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00049">
+        <header class="inquiry-header">
+            <span class="inquiry-type">PAYMENT</span>
+            <span class="priority">URGENT</span>
+            <span class="answer-status">답변대기</span>
+        </header>
+
+        <h2 class="inquiry-title">해외 카드 결제가 실패합니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">오현우</span></div>
+            <div><strong>국가</strong><span class="country-name">Singapore</span></div>
+            <div><strong>언어</strong><span class="language-code">en-SG</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-07-19 13:24</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 워치 A1</span></div>
+        </div>
+
+        <p class="inquiry-text">같은 주문이 두 번 승인된 것으로 보입니다. 중복 결제를 확인해 주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00050">
+        <header class="inquiry-header">
+            <span class="inquiry-type">return</span>
+            <span class="priority">LOW</span>
+            <span class="answer-status">답변완료</span>
+        </header>
+
+        <h2 class="inquiry-title"></h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">임수빈</span></div>
+            <div><strong>국가</strong><span class="country-name">Canada</span></div>
+            <div><strong>언어</strong><span class="language-code">en-CA</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/07/20 16:37</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1002</span></div>
+            <div><strong>상품명</strong><span class="product-name">무선 이어폰 B2</span></div>
+        </div>
+
+        <p class="inquiry-text">상품을 사용하지 않았습니다. 반품 방법과 배송비를 알려주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00051">
+        <header class="inquiry-header">
+            <span class="inquiry-type">exchange</span>
+            <span class="priority">Low</span>
+            <span class="answer-status">waiting</span>
+        </header>
+
+        <h2 class="inquiry-title">색상을 잘못 선택했습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">조민재</span></div>
+            <div><strong>국가</strong><span class="country-name">South Korea</span></div>
+            <div><strong>언어</strong><span class="language-code">ko</span></div>
+            <div><strong>작성일</strong><time class="posted-at">21-07-2026 09:50</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-2001</span></div>
+            <div><strong>상품명</strong><span class="product-name">태블릿 C10</span></div>
+        </div>
+
+        <p class="inquiry-text">교환 신청은 완료했는데 새 상품 배송 현황을 확인할 수 없습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00052">
+        <header class="inquiry-header">
+            <span class="inquiry-type">account</span>
+            <span class="priority">MEDIUM</span>
+            <span class="answer-status">answered</span>
+        </header>
+
+        <h2 class="inquiry-title">회원정보를 변경하고 싶습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">송하윤</span></div>
+            <div><strong>국가</strong><span class="country-name">Korea, Rep.</span></div>
+            <div><strong>언어</strong><span class="language-code">ko-KR</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.07.22 12:03</time></div>
+            <div><strong>상품코드</strong><span class="product-code"></span></div>
+            <div><strong>상품명</strong><span class="product-name">해당 없음</span></div>
+        </div>
+
+        <p class="inquiry-text">비밀번호 찾기를 여러 번 시도했지만 재설정 메일을 받지 못했습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00053">
+        <header class="inquiry-header">
+            <span class="inquiry-type">technical</span>
+            <span class="priority">Medium</span>
+            <span class="answer-status">in_progress</span>
+        </header>
+
+        <h2 class="inquiry-title">초기 설정 중 오류가 발생합니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Alex Morgan</span></div>
+            <div><strong>국가</strong><span class="country-name">United States</span></div>
+            <div><strong>언어</strong><span class="language-code">en</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-07-23 15:16</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-4001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 홈 허브 H1</span></div>
+        </div>
+
+        <p class="inquiry-text">초기 설정 중 인증 코드 단계에서 알 수 없는 오류가 표시됩니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00054">
+        <header class="inquiry-header">
+            <span class="inquiry-type">product_quality</span>
+            <span class="priority">HIGH</span>
+            <span class="answer-status">답변대기</span>
+        </header>
+
+        <h2 class="inquiry-title">포장 상태가 좋지 않았습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Emma Wilson</span></div>
+            <div><strong>국가</strong><span class="country-name">U.S.A.</span></div>
+            <div><strong>언어</strong><span class="language-code">en-US</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/07/24 18:29</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-5001</span></div>
+            <div><strong>상품명</strong><span class="product-name">기계식 키보드 K8</span></div>
+        </div>
+
+        <p class="inquiry-text">외부 상자와 내부 완충재가 일부 손상되어 있었습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00055">
+        <header class="inquiry-header">
+            <span class="inquiry-type">delivery</span>
+            <span class="priority">Urgent</span>
+            <span class="answer-status">답변완료</span>
+        </header>
+
+        <h2 class="inquiry-title">배송 조회가 되지 않습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Lucas Martin</span></div>
+            <div><strong>국가</strong><span class="country-name">Japan</span></div>
+            <div><strong>언어</strong><span class="language-code">ja</span></div>
+            <div><strong>작성일</strong><time class="posted-at">25-07-2026 11:42</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 워치 A1</span></div>
+        </div>
+
+        <p class="inquiry-text">배송 상태가 준비 중으로만 표시됩니다. 현재 위치를 확인해 주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00056">
+        <header class="inquiry-header">
+            <span class="inquiry-type">Delivery</span>
+            <span class="priority">URGENT</span>
+            <span class="answer-status">waiting</span>
+        </header>
+
+        <h2 class="inquiry-title">배송 조회가 되지 않습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Sofia Rossi</span></div>
+            <div><strong>국가</strong><span class="country-name">Deutschland</span></div>
+            <div><strong>언어</strong><span class="language-code">de</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.07.26 14:55</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1002</span></div>
+            <div><strong>상품명</strong><span class="product-name">무선 이어폰 B2</span></div>
+        </div>
+
+        <p class="inquiry-text">배송 상태가 준비 중으로만 표시됩니다. 현재 위치를 확인해 주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00057">
+        <header class="inquiry-header">
+            <span class="inquiry-type">payment</span>
+            <span class="priority">LOW</span>
+            <span class="answer-status">answered</span>
+        </header>
+
+        <h2 class="inquiry-title">결제가 두 번 처리되었습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Haruto Sato</span></div>
+            <div><strong>국가</strong><span class="country-name">France</span></div>
+            <div><strong>언어</strong><span class="language-code">fr</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-07-27 17:08</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-2001</span></div>
+            <div><strong>상품명</strong><span class="product-name">태블릿 C10</span></div>
+        </div>
+
+        <p class="inquiry-text">해외에서 발급한 카드로 결제할 때 승인 실패 메시지가 반복됩니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00058">
+        <header class="inquiry-header">
+            <span class="inquiry-type">PAYMENT</span>
+            <span class="priority">Low</span>
+            <span class="answer-status">in_progress</span>
+        </header>
+
+        <h2 class="inquiry-title">해외 카드 결제가 실패합니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Mei Lin</span></div>
+            <div><strong>국가</strong><span class="country-name">Taiwan</span></div>
+            <div><strong>언어</strong><span class="language-code">zh-TW</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/07/28 10:21</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-3001</span></div>
+            <div><strong>상품명</strong><span class="product-name">휴대용 충전기 P5</span></div>
+        </div>
+
+        <p class="inquiry-text"></p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00059">
+        <header class="inquiry-header">
+            <span class="inquiry-type">return</span>
+            <span class="priority">MEDIUM</span>
+            <span class="answer-status">답변대기</span>
+        </header>
+
+        <h2 class="inquiry-title">환불이 아직 처리되지 않았습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Lena Müller</span></div>
+            <div><strong>국가</strong><span class="country-name">Singapore</span></div>
+            <div><strong>언어</strong><span class="language-code">en-SG</span></div>
+            <div><strong>작성일</strong><time class="posted-at">29-07-2026 13:34</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-4001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 홈 허브 H1</span></div>
+        </div>
+
+        <p class="inquiry-text">반품 접수 후 회수 일정이 잡히지 않았습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00060">
+        <header class="inquiry-header">
+            <span class="inquiry-type">exchange</span>
+            <span class="priority">Medium</span>
+            <span class="answer-status">답변완료</span>
+        </header>
+
+        <h2 class="inquiry-title">색상을 잘못 선택했습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">Noah Brown</span></div>
+            <div><strong>국가</strong><span class="country-name">Canada</span></div>
+            <div><strong>언어</strong><span class="language-code">en-CA</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.07.30 16:47</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-5001</span></div>
+            <div><strong>상품명</strong><span class="product-name">기계식 키보드 K8</span></div>
+        </div>
+
+        <p class="inquiry-text">구성품 일부가 누락되어 교환을 요청하려고 합니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00061">
+        <header class="inquiry-header">
+            <span class="inquiry-type">account</span>
+            <span class="priority">HIGH</span>
+            <span class="answer-status">waiting</span>
+        </header>
+
+        <h2 class="inquiry-title">회원정보를 변경하고 싶습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">김민준</span></div>
+            <div><strong>국가</strong><span class="country-name">South Korea</span></div>
+            <div><strong>언어</strong><span class="language-code">ko</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-07-31 09:00</time></div>
+            <div><strong>상품코드</strong><span class="product-code"></span></div>
+            <div><strong>상품명</strong><span class="product-name">해당 없음</span></div>
+        </div>
+
+        <p class="inquiry-text">정확한 이메일과 비밀번호를 입력해도 로그인 오류가 발생합니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00062">
+        <header class="inquiry-header">
+            <span class="inquiry-type">technical</span>
+            <span class="priority">Urgent</span>
+            <span class="answer-status">answered</span>
+        </header>
+
+        <h2 class="inquiry-title">초기 설정 중 오류가 발생합니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">이서연</span></div>
+            <div><strong>국가</strong><span class="country-name">Korea, Rep.</span></div>
+            <div><strong>언어</strong><span class="language-code">ko-KR</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/08/01 12:13</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1002</span></div>
+            <div><strong>상품명</strong><span class="product-name">무선 이어폰 B2</span></div>
+        </div>
+
+        <p class="inquiry-text">제품은 검색되지만 연결 버튼을 누르면 실패합니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00063">
+        <header class="inquiry-header">
+            <span class="inquiry-type">product_quality</span>
+            <span class="priority">URGENT</span>
+            <span class="answer-status">in_progress</span>
+        </header>
+
+        <h2 class="inquiry-title">포장 상태가 좋지 않았습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">박지훈</span></div>
+            <div><strong>국가</strong><span class="country-name">United States</span></div>
+            <div><strong>언어</strong><span class="language-code">en</span></div>
+            <div><strong>작성일</strong><time class="posted-at">02-08-2026 15:26</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-2001</span></div>
+            <div><strong>상품명</strong><span class="product-name">태블릿 C10</span></div>
+        </div>
+
+        <p class="inquiry-text">완전히 충전해도 사용 시간이 설명서보다 매우 짧습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00064">
+        <header class="inquiry-header">
+            <span class="inquiry-type">delivery</span>
+            <span class="priority">LOW</span>
+            <span class="answer-status">답변대기</span>
+        </header>
+
+        <h2 class="inquiry-title">배송 조회가 되지 않습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">최유진</span></div>
+            <div><strong>국가</strong><span class="country-name">KOREA??</span></div>
+            <div><strong>언어</strong><span class="language-code">en-US</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.08.03 18:39</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-3001</span></div>
+            <div><strong>상품명</strong><span class="product-name">휴대용 충전기 P5</span></div>
+        </div>
+
+        <p class="inquiry-text">안내받은 도착 예정일이 지났지만 상품을 받지 못했습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00065">
+        <header class="inquiry-header">
+            <span class="inquiry-type">Delivery</span>
+            <span class="priority">Low</span>
+            <span class="answer-status">답변완료</span>
+        </header>
+
+        <h2 class="inquiry-title">배송 조회가 되지 않습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">정도현</span></div>
+            <div><strong>국가</strong><span class="country-name">Japan</span></div>
+            <div><strong>언어</strong><span class="language-code">ja</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-08-04 11:52</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-4001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 홈 허브 H1</span></div>
+        </div>
+
+        <p class="inquiry-text">이사로 인해 기존 주소에서 새로운 주소로 배송지를 변경하고 싶습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00066">
+        <header class="inquiry-header">
+            <span class="inquiry-type">payment</span>
+            <span class="priority">MEDIUM</span>
+            <span class="answer-status">waiting</span>
+        </header>
+
+        <h2 class="inquiry-title">결제가 두 번 처리되었습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">한지민</span></div>
+            <div><strong>국가</strong><span class="country-name">Deutschland</span></div>
+            <div><strong>언어</strong><span class="language-code">de</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/08/05 14:05</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-5001</span></div>
+            <div><strong>상품명</strong><span class="product-name">기계식 키보드 K8</span></div>
+        </div>
+
+        <p class="inquiry-text">회사 제출용 영수증이 필요합니다. 주문번호가 포함된 영수증을 다시 보내주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00067">
+        <header class="inquiry-header">
+            <span class="inquiry-type">PAYMENT</span>
+            <span class="priority">Medium</span>
+            <span class="answer-status">answered</span>
+        </header>
+
+        <h2 class="inquiry-title">해외 카드 결제가 실패합니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">윤서준</span></div>
+            <div><strong>국가</strong><span class="country-name">France</span></div>
+            <div><strong>언어</strong><span class="language-code">fr</span></div>
+            <div><strong>작성일</strong><time class="posted-at">06-08-2026 17:18</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 워치 A1</span></div>
+        </div>
+
+        <p class="inquiry-text">같은 주문이 두 번 승인된 것으로 보입니다. 중복 결제를 확인해 주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00068">
+        <header class="inquiry-header">
+            <span class="inquiry-type">return</span>
+            <span class="priority">HIGH</span>
+            <span class="answer-status">in_progress</span>
+        </header>
+
+        <h2 class="inquiry-title">환불이 아직 처리되지 않았습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">장예린</span></div>
+            <div><strong>국가</strong><span class="country-name">Taiwan</span></div>
+            <div><strong>언어</strong><span class="language-code">zh-TW</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.08.07 10:31</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-1002</span></div>
+            <div><strong>상품명</strong><span class="product-name">무선 이어폰 B2</span></div>
+        </div>
+
+        <p class="inquiry-text">상품을 사용하지 않았습니다. 반품 방법과 배송비를 알려주세요.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00069">
+        <header class="inquiry-header">
+            <span class="inquiry-type">exchange</span>
+            <span class="priority">ASAP</span>
+            <span class="answer-status">답변대기</span>
+        </header>
+
+        <h2 class="inquiry-title">색상을 잘못 선택했습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">오현우</span></div>
+            <div><strong>국가</strong><span class="country-name">Singapore</span></div>
+            <div><strong>언어</strong><span class="language-code">en-SG</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026-08-08 13:44</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-2001</span></div>
+            <div><strong>상품명</strong><span class="product-name">태블릿 C10</span></div>
+        </div>
+
+        <p class="inquiry-text">교환 신청은 완료했는데 새 상품 배송 현황을 확인할 수 없습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00070">
+        <header class="inquiry-header">
+            <span class="inquiry-type">account</span>
+            <span class="priority">URGENT</span>
+            <span class="answer-status">답변완료</span>
+        </header>
+
+        <h2 class="inquiry-title">회원정보를 변경하고 싶습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">임수빈</span></div>
+            <div><strong>국가</strong><span class="country-name">Canada</span></div>
+            <div><strong>언어</strong><span class="language-code">en-CA</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026/08/09 16:57</time></div>
+            <div><strong>상품코드</strong><span class="product-code"></span></div>
+            <div><strong>상품명</strong><span class="product-name">해당 없음</span></div>
+        </div>
+
+        <p class="inquiry-text">비밀번호 찾기를 여러 번 시도했지만 재설정 메일을 받지 못했습니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00071">
+        <header class="inquiry-header">
+            <span class="inquiry-type">technical</span>
+            <span class="priority">LOW</span>
+            <span class="answer-status">waiting</span>
+        </header>
+
+        <h2 class="inquiry-title">초기 설정 중 오류가 발생합니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">조민재</span></div>
+            <div><strong>국가</strong><span class="country-name">South Korea</span></div>
+            <div><strong>언어</strong><span class="language-code">ko</span></div>
+            <div><strong>작성일</strong><time class="posted-at">10-08-2026 09:10</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-4001</span></div>
+            <div><strong>상품명</strong><span class="product-name">스마트 홈 허브 H1</span></div>
+        </div>
+
+        <p class="inquiry-text">초기 설정 중 인증 코드 단계에서 알 수 없는 오류가 표시됩니다.</p>
+    </article>
+    
+    <article class="inquiry-card"
+             data-inquiry-id="WEB-00072">
+        <header class="inquiry-header">
+            <span class="inquiry-type">product_quality</span>
+            <span class="priority">Low</span>
+            <span class="answer-status">answered</span>
+        </header>
+
+        <h2 class="inquiry-title">포장 상태가 좋지 않았습니다</h2>
+
+        <div class="inquiry-meta">
+            <div><strong>작성자</strong><span class="author-name">송하윤</span></div>
+            <div><strong>국가</strong><span class="country-name">Korea, Rep.</span></div>
+            <div><strong>언어</strong><span class="language-code">ko-KR</span></div>
+            <div><strong>작성일</strong><time class="posted-at">2026.08.11 12:23</time></div>
+            <div><strong>상품코드</strong><span class="product-code">PRD-5001</span></div>
+            <div><strong>상품명</strong><span class="product-name">기계식 키보드 K8</span></div>
+        </div>
+
+        <p class="inquiry-text">외부 상자와 내부 완충재가 일부 손상되어 있었습니다.</p>
+    </article>
+    
+    </main>
+</body>
+</html>

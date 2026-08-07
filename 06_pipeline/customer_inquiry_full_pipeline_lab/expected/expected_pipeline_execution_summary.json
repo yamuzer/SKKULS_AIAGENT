@@ -1,0 +1,16 @@
+{
+  "started_at": "2026-08-06 14:21:39",
+  "completed_at": "2026-08-06 14:21:40",
+  "crawl_status": "SUCCESS",
+  "crawl_url": "http://127.0.0.1:8030/customer_inquiries.html",
+  "crawl_http_status": 200,
+  "raw_csv": "/mnt/data/customer_inquiry_full_pipeline_lab/data/raw/customer_inquiry_raw.csv",
+  "database_load_requested": false,
+  "database_load_status": "SKIPPED",
+  "total_count": 72,
+  "valid_count": 63,
+  "invalid_count": 9,
+  "quality_issue_count": 9,
+  "valid_rate": 87.5,
+  "invalid_rate": 12.5
+}

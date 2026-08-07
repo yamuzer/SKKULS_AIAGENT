@@ -1,0 +1,8 @@
+﻿raw_value,priority_code,priority_level
+LOW,LOW,1
+Low,LOW,1
+MEDIUM,MEDIUM,2
+Medium,MEDIUM,2
+HIGH,HIGH,3
+Urgent,URGENT,4
+URGENT,URGENT,4

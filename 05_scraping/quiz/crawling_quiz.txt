@@ -1,0 +1,142 @@
+문제 1. 새로운 로컬 HTML에서 문화행사 정보 추출
+
+실습 상황
+
+`data/community_event_board.html`은 지역별 문화행사 신청 정보를 담은
+교육용 HTML 파일입니다.
+
+기존 수업에서 사용한 상품 목록과는 태그 이름, 클래스 이름, 속성 이름,
+데이터 주제가 모두 다릅니다. HTML 구조를 직접 확인하고 적절한
+BeautifulSoup 선택자를 작성하세요.
+
+요구사항
+
+1. HTML 읽기
+
+- `Path`로 `data/community_event_board.html`을 읽습니다.
+- 인코딩은 `utf-8`을 사용합니다.
+- `BeautifulSoup(..., "html.parser")`로 파싱합니다.
+
+2. 문서 기본 정보 출력
+
+다음을 출력하세요.
+
+- 문서 `title`
+- `h1#board-title`의 텍스트
+- `.board-description`의 텍스트
+- `h1` 태그의 이름과 `id` 속성
+
+3. 메뉴 링크 추출
+
+`.region-menu > li > a`를 선택하여 다음을 출력하세요.
+
+- 지역명
+- `href`
+- `data-region-code`
+
+4. 단일 행사 찾기
+
+`data-event-no="EVT-26008"`인 `article`을 찾고 다음을 출력하세요.
+
+- 행사명
+- 주최기관
+- 평점
+- 신청상태
+
+`find()`와 `select_one()`을 함께 사용하세요.
+
+5. CSS 선택자 연습
+
+다음 요소를 각각 선택하고 개수를 출력하세요.
+
+- 전체 행사 카드
+- 추천 행사가 아닌 카드
+- 신청마감 상태를 포함한 카드
+- 추천 행사가 아니면서 신청가능 상태인 카드
+- 홀수 번째 행사 카드
+- `4n+1` 번째 행사 카드
+- 온라인 행사 카드
+
+다음 선택자 문법을 활용합니다.
+
+- 직접 자식 선택자 `>`
+- `:not()`
+- `:has()`
+- `:nth-of-type()`
+
+6. 행사 카드 전체 반복 추출
+
+각 카드에서 다음 값을 추출해 딕셔너리 목록을 만드세요.
+
+- `event_no`
+- `event_id`
+- `event_name`
+- `region`
+- `category`
+- `organizer`
+- `start_at`
+- `location`
+- `fee`
+- `rating`
+- `applicants`
+- `capacity`
+- `registration_status`
+- `event_url`
+
+처리 기준:
+
+- `event_no`, `region`, `capacity`, `fee`는 `data-*` 속성에서 읽습니다.
+- `event_id`는 상세 링크의 쿼리스트링에서 추출합니다.
+- `event_url`은 `urljoin()`을 이용해 절대 URL로 만듭니다.
+- 무료 행사의 참가비는 숫자 `0`으로 처리합니다.
+- 평점과 신청인원은 문자열에서 숫자만 정제합니다.
+- `start_at`은 `time` 태그의 `datetime` 속성을 사용합니다.
+
+기준 URL:
+
+```python
+BASE_URL = "https://culture.example.com"
+```
+
+7. DataFrame 생성과 저장
+
+딕셔너리 목록으로 DataFrame을 생성합니다.
+
+자료형:
+
+- `capacity`, `fee`, `applicants`: 정수
+- `rating`: 실수
+- `start_at`: datetime
+
+다음 위치에 저장하세요.
+
+```text
+output/problem1/community_events.csv
+```
+
+8. 행사 요약 표 찾기
+
+HTML 안에는 두 개의 표가 있습니다. 클래스 이름을 바로 사용하지 말고,
+모든 `table`을 순회하면서 다음 헤더를 모두 가진 표를 찾으세요.
+
+- 행사번호
+- 행사명
+- 지역
+- 신청상태
+
+찾은 표에서 헤더와 모든 행을 추출하고 DataFrame으로 만드세요.
+
+```text
+output/problem1/event_summary_table.csv
+```
+
+9. 결과 검증
+
+다음을 출력하세요.
+
+- 행사 카드 추출 수
+- 요약 표 행 수
+- 추천 행사 수
+- 신청마감 행사 수
+- 무료 행사 수
+- 카드와 표의 행사번호 집합이 같은지 여부
