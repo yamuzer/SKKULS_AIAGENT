@@ -1,0 +1,12 @@
+{
+  "database": "customer_quality_practice",
+  "schema": "web_inquiry_quality",
+  "tables": {
+    "pipeline_run_history": "파이프라인 실행 이력과 단계별 적재 건수",
+    "web_inquiry_raw": "크롤링으로 수집한 원천 고객 문의",
+    "web_inquiry_standardized": "기준정보를 적용한 표준화 고객 문의",
+    "web_inquiry_valid": "모든 품질 규칙을 통과한 고객 문의",
+    "web_inquiry_rejected": "한 개 이상의 품질 규칙을 위반한 고객 문의",
+    "web_inquiry_quality_issue": "행별 품질 규칙 위반 상세"
+  }
+}
