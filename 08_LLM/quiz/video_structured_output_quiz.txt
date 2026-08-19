@@ -1,0 +1,258 @@
+quiz — Video Structured Output → JSON → DataFrame → 분석
+
+[제공 영상]
+review_multiscene_shapes.mp4
+
+영상 길이:
+약 30초
+
+이번 문제의 핵심 목표:
+
+Video
+↓
+Gemini Video Understanding
+↓
+Pydantic Class
+↓
+Structured JSON
+↓
+JSON 파일 저장
+↓
+pandas DataFrame
+↓
+분석
+↓
+CSV 저장
+
+
+============================================================
+문제 1. Pydantic Class 만들기
+============================================================
+
+다음 두 Class를 작성한다.
+
+1) VideoSegment
+
+필드:
+
+start_time
+- str
+- MM:SS
+
+end_time
+- str
+- MM:SS
+
+main_objects
+- list[str]
+
+object_count
+- int
+- 화면에서 핵심적으로 분석한 도형 객체 수
+- 배경과 단순 시간 표시는 객체 수에서 제외
+
+event_type
+- Literal
+- 다음 값만 허용
+
+"이동"
+"정지"
+"등장과 이동"
+"복합 이동"
+"장면 전환"
+"확인 어려움"
+
+motion_direction
+- Literal
+
+"좌→우"
+"우→좌"
+"상→하"
+"하→상"
+"대각선"
+"복합"
+"없음"
+"확인 어려움"
+
+scene_change
+- bool
+- 해당 구간 시작 시점에 이전 구간과 명확한 장면 전환이 있으면 True
+- 첫 구간은 False
+
+confidence
+- Literal["높음", "보통", "낮음"]
+
+
+2) VideoReviewResult
+
+필드:
+
+video_summary
+segments
+key_changes
+uncertain_items
+
+
+============================================================
+문제 2. Gemini에 영상 업로드
+============================================================
+
+Files API로 영상을 업로드한다.
+
+영상이 ACTIVE가 될 때까지 files.get()으로 상태를 확인한다.
+
+
+============================================================
+문제 3. Structured Output 요청
+============================================================
+
+gemini-3.7-flash를 사용한다.
+
+반드시 다음 6구간을 각각 분석한다.
+
+00:00 ~ 00:05
+00:05 ~ 00:10
+00:10 ~ 00:15
+00:15 ~ 00:20
+00:20 ~ 00:25
+00:25 ~ 00:30
+
+response_format에
+
+VideoReviewResult.model_json_schema()
+
+를 사용한다.
+
+최종 결과는
+
+VideoReviewResult.model_validate_json()
+
+으로 검증한다.
+
+
+============================================================
+문제 4. JSON 저장
+============================================================
+
+Pydantic 결과를
+
+review_video_result.json
+
+파일로 저장한다.
+
+ensure_ascii=False
+indent=2
+
+를 사용한다.
+
+
+============================================================
+문제 5. JSON → DataFrame
+============================================================
+
+저장한 JSON을 다시 읽고
+
+data["segments"]
+
+를 pandas DataFrame으로 변환한다.
+
+변수명:
+
+df
+
+
+============================================================
+문제 6. 시간 Column 추가
+============================================================
+
+MM:SS를 초로 바꾸는 함수를 만든다.
+
+def timestamp_to_seconds(...)
+
+다음 Column을 추가한다.
+
+start_seconds
+end_seconds
+duration_seconds
+
+
+============================================================
+문제 7. DataFrame 분석
+============================================================
+
+df에서 다음 값을 계산한다.
+
+1. 전체 Segment 수
+
+2. 전체 분석 시간
+
+3. 평균 Segment 길이
+
+4. event_type별 Segment 개수
+
+5. scene_change == True인 Segment 개수
+
+6. 평균 object_count
+
+7. object_count가 가장 큰 Segment
+
+8. confidence별 Segment 개수
+
+9. motion_direction이 "대각선"인 Segment
+
+10. main_objects를 explode()하여
+    객체별 등장 Segment 수 계산
+
+
+============================================================
+문제 8. GroupBy 분석
+============================================================
+
+event_type별로 다음을 계산한다.
+
+- Segment 수
+- 평균 object_count
+- 총 duration_seconds
+
+결과 변수:
+
+event_analysis_df
+
+
+============================================================
+문제 9. CSV 저장
+============================================================
+
+전체 Segment DataFrame:
+
+review_video_segments.csv
+
+event_type GroupBy 결과:
+
+review_video_event_analysis.csv
+
+두 파일로 저장한다.
+
+
+============================================================
+문제 10. 마지막 출력
+============================================================
+
+최종적으로 다음을 출력한다.
+
+- 전체 Segment 수
+- Scene Change 수
+- 가장 많이 등장한 event_type
+- 평균 Object 수
+- 가장 많이 등장한 main_object
+- 대각선 이동 Segment 수
+
+
+[주의]
+
+1. Gemini가 생성한 JSON 값은 문장 표현이 조금 달라질 수 있다.
+2. Class 구조와 enum 값은 반드시 지켜야 한다.
+3. Structured Output은 형식을 보장하기 위한 것이며
+   영상 내용의 사실 정확성을 자동 보장하지 않는다.
+4. DataFrame 분석은 Gemini의 자연어 답이 아니라
+   JSON으로부터 만든 df를 기준으로 수행한다.
