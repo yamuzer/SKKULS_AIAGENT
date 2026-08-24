@@ -1,0 +1,175 @@
+퀴즈
+
+1. Google Search Tool
+2. Google Search 결과의 steps / url_citation 확인
+3. URL Context Tool
+4. url_context_call / url_context_result 확인
+5. Structured Output + Pydantic
+6. Code Execution Tool
+7. code_execution_call / code_execution_result / call_id 연결
+8. CSV 파일을 Gemini에 전달하여 실제 데이터 분석
+
+공통 조건
+---------
+- .env의 GEMINI_API_KEY를 읽는다.
+- google.genai의 Interactions API를 사용한다.
+- Python 파일명에는 한글을 사용하지 않는다.
+- 결과를 단순히 출력하는 것에서 끝내지 말고 tool step도 확인한다.
+- Google Search 문제는 최신 정보이므로 기억에 의존하지 않는다.
+- URL Context 문제는 지정 URL 밖의 정보를 섞지 않는다.
+- Code Execution 문제는 반드시 실제 Python 코드를 실행하게 한다.
+
+
+[복습 1] Google Search + Citation
+
+2026년 8월 현재 pandas의 최신 안정 버전을 Google Search Tool로 조사한다.
+
+요구사항
+1. 반드시 google_search tool을 사용한다.
+2. 최신 안정 버전, 릴리스 날짜, 주요 변경 또는 수정 사항 3개를 요청한다.
+3. 가능하면 pandas 공식 문서를 우선하도록 프롬프트에 명시한다.
+4. interaction.steps를 순회한다.
+5. google_search_call에서 실제 검색 query를 출력한다.
+6. model_output의 text를 출력한다.
+7. url_citation annotation의 title, url, start_index, end_index를 출력한다.
+8. citation 정보를 outputs/search_citations.csv로 저장한다.
+
+
+[복습 2] URL Context + Retrieval Audit
+
+data/official_urls.csv에 있는 pandas 3.0.0 공식 릴리스 노트를 URL Context Tool로 읽는다.
+
+분석 항목
+1. 문서 제목
+2. 공식 릴리스 날짜
+3. 주요 변화 5개
+4. string dtype 관련 변화
+5. Copy-on-Write 관련 변화
+6. 업그레이드 시 주의할 내용 3개
+
+요구사항
+1. Google Search를 사용하지 않는다.
+2. url_context tool만 사용한다.
+3. url_context_call의 URL을 출력한다.
+4. url_context_result의 status, url, title, snippet을 출력한다.
+5. model_output의 url_citation도 확인한다.
+6. retrieval/citation 정보를 outputs/url_context_audit.csv에 저장한다.
+
+
+[복습 3] URL Context + Structured Output
+
+다음 두 문서를 URL Context Tool로 읽고 비교한다.
+- pandas 3.0.0 release notes
+- pandas 3.0.5 release notes
+
+Pydantic 모델을 직접 정의한다.
+
+최소 필드
+- source_urls
+- old_version
+    - version
+    - release_date
+    - highlights
+    - compatibility_notes
+- new_version
+    - version
+    - release_date
+    - highlights
+    - bugfix_or_regression_topics
+- major_differences
+- upgrade_checkpoints
+
+요구사항
+1. response_format에 model_json_schema()를 사용한다.
+2. mime_type은 application/json을 사용한다.
+3. model_validate_json()으로 검증한다.
+4. 검증 실패 시 최대 1회 재요청한다.
+5. 최종 JSON을 outputs/pandas_version_comparison.json으로 저장한다.
+6. 핵심 비교 항목은 outputs/pandas_version_comparison.csv에도 저장한다.
+
+
+[복습 4] CSV + Code Execution
+
+data/course_activity.csv를 Gemini에 전달하고 Code Execution Tool로 분석한다.
+
+반드시 계산할 항목
+1. 전체 행 수
+2. 고유 student_id 수
+3. activity_date의 최소/최대 날짜
+4. 완전 중복 행 수와 중복 activity_id 수
+5. 각 컬럼의 결측치 수
+6. study_minutes, completion_rate, quiz_score의 기본 통계
+7. course_name별 평균 study_minutes / completion_rate / quiz_score
+8. dropout_flag 비율
+9. 평균 completion_rate가 높은 과정 상위 3개
+10. study_minutes와 quiz_score의 상관계수
+11. 월별 평균 study_minutes와 quiz_score
+12. 다음 이상치 개수
+    - study_minutes > 600
+    - quiz_score > 100
+    - completion_rate > 1
+    - estimated_cost_krw < 0
+
+요구사항
+1. CSV 파일을 실제 입력 파일로 전달한다.
+2. 반드시 code_execution tool을 사용한다.
+3. 생성된 Python 코드를 출력한다.
+4. 실행 결과를 출력한다.
+5. is_error를 확인한다.
+6. code_execution_call.id와 code_execution_result.call_id를 연결한다.
+7. 호출/결과 감사 로그를 outputs/course_code_audit.csv에 저장한다.
+
+
+[응용 1] 고객지원 데이터 진단
+
+data/support_tickets.csv를 Code Execution Tool로 분석한다.
+
+업무 질문
+1. 전체 티켓 수와 중복 티켓 수는?
+2. priority별 티켓 수와 비율은?
+3. channel별 평균 first_response_hours는?
+4. 해결된 티켓만 대상으로 priority별 평균/중앙 resolution_hours는?
+5. reopened_flag 비율은?
+6. category별 평균 satisfaction은?
+7. 월별 티켓 수 추이는?
+8. agent_team별 처리 성과를 비교하라.
+9. resolution_hours < 0 또는 > 500인 비정상 행을 찾아라.
+10. 결측치가 업무 분석에 어떤 영향을 주는지 데이터에 근거해 설명하라.
+
+추가 요구사항
+- 분석용 코드는 Gemini가 실제로 생성하고 실행해야 한다.
+- 결과를 계산 없이 추측하지 않는다.
+- call/result를 call_id로 연결하여 outputs/support_code_audit.csv에 저장한다.
+
+
+[응용 2] 통합 리서치 + 구조화 보고서
+
+목표:
+'현재 pandas 안정 버전'에 대한 최신 정보와 'pandas 3.0.0 공식 릴리스 노트'의 내용을 서로 구분하여 보고서를 만든다.
+
+1단계
+- Google Search Tool로 현재 최신 pandas 안정 버전을 조사한다.
+- 공식 pandas 문서를 우선한다.
+- citation을 수집한다.
+
+2단계
+- URL Context Tool로 pandas 3.0.0 릴리스 노트만 읽는다.
+- 3.0.0에서 큰 변화와 마이그레이션 주의사항을 추출한다.
+
+3단계
+- 두 결과를 합쳐 Pydantic Structured Output으로 정리한다.
+
+최소 필드
+- current_stable_version
+- current_release_date
+- current_sources
+- pandas_300_release_date
+- pandas_300_major_changes
+- migration_notes
+- evidence_separation_note
+
+핵심 평가 기준
+- '현재 최신 정보'와 '3.0.0 문서의 사실'을 섞지 않았는가?
+- 최신 정보에는 Search 근거가 있는가?
+- 3.0.0 정보에는 지정 URL Context 근거가 있는가?
+- 최종 결과가 Pydantic 검증을 통과하는가?
