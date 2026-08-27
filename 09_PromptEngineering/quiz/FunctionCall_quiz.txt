@@ -1,0 +1,341 @@
+[데이터 확인]
+
+data/cowork_room_info.csv 파일에는 총 300개의 공간 정보가 들어 있다.
+
+주요 컬럼:
+- branch              : 지점명
+- building            : 건물명
+- room_name           : 공간 이름
+- floor               : 층
+- room_type           : 공간 유형
+- capacity            : 수용 인원
+- monitor_count       : 모니터 수
+- pc_count            : PC 수
+- video_conference    : 화상회의 가능 여부(Y/N)
+- whiteboard          : 화이트보드 여부(Y/N)
+- wifi                : Wi-Fi 여부(Y/N)
+- accessibility       : 접근성 시설 여부(Y/N)
+- hourly_price        : 시간당 가격
+- status              : AVAILABLE / RESERVED / MAINTENANCE
+
+
+================================================================================
+실습 1. Function Declaration 작성
+================================================================================
+
+목표:
+사용자 질문을 보고 Gemini가 필요한 Function을 선택하고
+arguments를 만들 수 있도록 Function Declaration을 직접 작성한다.
+
+구현할 Function 이름:
+    get_room_info
+
+필수 arguments:
+    branch
+    room_name
+
+조건:
+1. type은 function으로 설정한다.
+2. name은 get_room_info로 설정한다.
+3. description은 특정 지점의 특정 공간 상세 정보를 조회한다는 뜻이 되게 작성한다.
+4. branch와 room_name은 모두 string이다.
+5. branch에는 아래 enum을 사용한다.
+
+    강남, 여의도, 판교, 광화문, 성수, 잠실,
+    마곡, 구로, 수원, 인천, 대전, 부산
+
+6. branch와 room_name은 required로 지정한다.
+7. 다음 질문을 Gemini에게 전달한다.
+
+    "판교 지점의 프로젝트룸03 정보를 확인해줘."
+
+8. interaction.steps에서 function_call을 찾아
+   다음 값을 출력한다.
+
+    call id
+    function name
+    arguments
+
+
+================================================================================
+실습 2. 단일 Tool Function Call 분석
+================================================================================
+
+목표:
+Function Declaration을 함수 호출에 연결하고
+여러 질문에서 Gemini가 만든 function_call을 확인한다.
+
+room_name enum에는 데이터에 존재하는 25개 공간 이름을 모두 사용한다.
+
+다음 질문을 순서대로 테스트한다.
+
+1. "강남 미팅룸04의 정보를 확인해줘."
+2. "부산 화상회의실02의 수용 인원과 화상회의 가능 여부를 확인해줘."
+3. "대전 세미나실03의 정보를 알려줘."
+
+각 질문마다 다음 내용을 출력한다.
+
+- interaction status
+- interaction step type
+- function name
+- arguments
+- call id
+
+
+================================================================================
+실습 3. 여러 Tool 중 적절한 함수 선택
+================================================================================
+
+목표:
+하나의 Tool만 제공하지 않고 여러 Tool을 제공했을 때
+질문 의도에 따라 Gemini가 적절한 Function을 선택하는지 확인한다.
+
+다음 4개의 Tool을 선언한다.
+
+1. get_room_info(branch, room_name)
+   - 특정 지점의 특정 공간 하나 조회
+
+2. get_rooms_by_branch(branch)
+   - 특정 지점의 전체 공간 목록 조회
+
+3. get_rooms_by_min_capacity(minimum_capacity)
+   - 전체 지점에서 최소 수용 인원 이상 공간 검색
+
+4. search_video_rooms(minimum_capacity, maximum_hourly_price)
+   - 화상회의 가능 공간 중
+     최소 수용 인원 이상이면서
+     최대 시간당 가격 이하인 공간 검색
+
+다음 질문을 테스트한다.
+
+A.
+"여의도 미팅룸07 정보를 알려줘."
+예상 Function:
+get_room_info
+
+B.
+"성수 지점에 있는 공간을 전부 보여줘."
+예상 Function:
+get_rooms_by_branch
+
+C.
+"20명 이상 들어갈 수 있는 공간을 찾아줘."
+예상 Function:
+get_rooms_by_min_capacity
+
+D.
+"화상회의가 가능하고 8명 이상 들어가며 시간당 35000원 이하인 공간을 찾아줘."
+예상 Function:
+search_video_rooms
+
+E.
+"Python의 dict와 list 차이를 설명해줘."
+예상 Function:
+없음
+
+각 질문마다 예상 Function과 실제 선택 Function을 비교하여 출력한다.
+
+
+================================================================================
+실습 4. Pydantic Arguments Validation
+================================================================================
+
+목표:
+Gemini 또는 외부 입력에서 전달된 arguments를
+실제 Python Function 실행 전에 검증한다.
+
+다음 Pydantic 모델을 만든다.
+
+1. RoomInfoArguments
+   branch
+   room_name
+
+2. RoomsByBranchArguments
+   branch
+
+3. RoomsByMinCapacityArguments
+   minimum_capacity
+   범위: 1 ~ 100
+
+4. SearchVideoRoomsArguments
+   minimum_capacity
+   범위: 1 ~ 100
+
+   maximum_hourly_price
+   범위: 5000 ~ 200000
+
+모든 모델은:
+    strict=True
+    extra="forbid"
+
+를 사용한다.
+
+validate_function_arguments() 함수를 작성하여
+다음 형태로 결과를 반환한다.
+
+성공:
+{
+    "valid": True,
+    "data": 검증된 dict,
+    "errors": []
+}
+
+실패:
+{
+    "valid": False,
+    "data": None,
+    "errors": 오류 목록
+}
+
+반드시 다음 잘못된 arguments도 테스트한다.
+
+1. branch만 있고 room_name이 없음
+2. enum에 없는 branch = "춘천"
+3. minimum_capacity = "20"  # 문자열
+4. minimum_capacity = 0
+5. maximum_hourly_price = 3000
+6. 정의하지 않은 extra argument 포함
+7. 등록되지 않은 function name
+
+
+================================================================================
+실습 5. 전체 Function Calling 파이프라인
+================================================================================
+
+목표:
+CSV의 실제 데이터를 조회한 뒤 Function Result를 Gemini에게 반환하여
+최종 자연어 답변까지 생성한다.
+
+전체 흐름:
+
+사용자 질문
+    ↓
+Gemini
+    ↓
+function_call
+    ↓
+Arguments Validation
+    ↓
+실제 Python Function
+    ↓
+Function Result
+    ↓
+function_result
+    ↓
+previous_interaction_id와 함께 Gemini에 반환
+    ↓
+Gemini 최종 자연어 답변
+
+
+구현해야 할 실제 Python 함수:
+
+1. get_room_info(branch, room_name)
+
+반환할 주요 정보:
+branch, building, room_name, floor, room_type,
+capacity, monitor_count, pc_count,
+video_conference, whiteboard, wifi,
+accessibility, hourly_price, status
+
+
+2. get_rooms_by_branch(branch)
+
+반환:
+- success
+- branch
+- count
+- data
+
+
+3. get_rooms_by_min_capacity(minimum_capacity)
+
+조건:
+capacity >= minimum_capacity
+
+정렬:
+capacity 내림차순
+hourly_price 오름차순
+
+
+4. search_video_rooms(
+       minimum_capacity,
+       maximum_hourly_price
+   )
+
+조건:
+- video_conference == True
+- capacity >= minimum_capacity
+- hourly_price <= maximum_hourly_price
+- status == "AVAILABLE"
+
+정렬:
+hourly_price 오름차순
+capacity 내림차순
+
+
+FUNCTION_MAP을 만들어 Function 이름과 Python 함수를 연결한다.
+
+Arguments Validation 성공 후에만 실제 Python Function을 실행한다.
+
+Function Result는 아래 형태로 만든다.
+
+{
+    "type": "function_result",
+    "name": call.name,
+    "call_id": call.id,
+    "result": [
+        {
+            "type": "text",
+            "text": json.dumps(...)
+        }
+    ]
+}
+
+TURN 2에서는 TURN 1의 interaction.id를
+previous_interaction_id로 전달한다.
+
+
+[테스트 질문]
+
+1.
+"판교 프로젝트룸03의 수용 인원, PC 수,
+ 화상회의 가능 여부와 시간당 가격을 알려줘."
+
+2.
+"부산 지점에 공간이 몇 개 있는지 확인하고
+ 공간 이름을 간단히 알려줘."
+
+3.
+"30명 이상 들어갈 수 있는 공간을 찾아서
+ 수용 인원이 큰 순서대로 5개만 알려줘."
+
+4.
+"화상회의가 가능하고 10명 이상 들어가며
+ 시간당 40000원 이하이고 현재 이용 가능한 공간을
+ 가격이 저렴한 순으로 5개 알려줘."
+
+
+================================================================================
+실습 6. 선택 응용 문제
+================================================================================
+
+다음 Function을 하나 더 추가한다.
+
+find_pc_rooms(
+    minimum_pc_count,
+    branch
+)
+
+조건:
+- 지정한 branch 안에서 검색
+- pc_count >= minimum_pc_count
+- status != "MAINTENANCE"
+
+Pydantic 조건:
+minimum_pc_count는 0 ~ 50 정수
+
+테스트 질문:
+"마곡 지점에서 PC가 6대 이상이고 점검 중이 아닌 공간을 찾아줘."
+
+추가로 Tool Description을 일부러 애매하게 작성한 뒤
+Gemini의 선택 결과가 어떻게 달라지는지도 비교해본다.
