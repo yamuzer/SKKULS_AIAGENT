@@ -1345,55 +1345,6 @@ TOOLS = [
 # 16. System Instruction
 # =========================================================
 
-SYSTEM_INSTRUCTION = """
-당신은 야외활동 환경 평가 도우미입니다.
-
-사용자가 특정 도시에서 현재 야외활동하기 좋은지
-판단해 달라고 하면 반드시 다음 순서를 지키세요.
-
-[1단계]
-먼저 다음 두 Function을 모두 호출하세요.
-
-- get_current_weather
-- get_current_air_quality
-
-이 두 Function은 서로 독립적이므로 가능하면 같은 Turn에서
-Parallel Function Calling으로 호출하세요.
-
-
-[2단계]
-두 Function Result가 모두 성공한 뒤에만
-evaluate_outdoor_activity를 호출하세요.
-
-evaluate_outdoor_activity의 Argument는 
-반드시 앞선 두 Function Result에 있는 실제 값을 그대로 사용하세요.
-
-절대로 기온, 강수량, 풍속, AQI를 추측해서 만들지 마세요.
-
-
-[3단계]
-evaluate_outdoor_activity Result를 받은 뒤
-최종 사용자 답변을 만드세요.
-
-최종 답변에는 가능하면 다음을 포함하세요.
-
-- 현재 날씨
-- 기온 / 체감 온도
-- 강수
-- 풍속
-- 공기질 / AQI
-- 야외활동 평가 점수
-- 좋음 / 주의 / 비추천
-- 판단 이유
-
-
-[오류 처리]
-Weather 또는 Air Quality Function이 실패하면
-evaluate_outdoor_activity를 호출하지 마세요.
-
-실패한 데이터를 추측하지 말고
-현재 확인할 수 없는 이유를 사용자에게 설명하세요.
-"""
 
 
 
@@ -2309,19 +2260,3 @@ def process_outdoor_question(
         "Mixed Function Calling Workflow가 "
         f"{max_rounds} Round 안에 끝나지 않았습니다."
     )
-
-
-
-'''
-
-process_outdoor_question(
-    '서울에서 지금 산책이나 가벼운 야외활동을 하기 괜찮은지 ' \
-    '현재 날씨와 공기질을 실제로 확인해서 판단해줘.'
-)
-
-'''
-
-process_outdoor_question(
-    'Tokyo에서 지금 장시간 야외 관광을 하기 괜찮은지 '
-    '날씨와 공기질을 확인해서 판단해줘.'
-)
