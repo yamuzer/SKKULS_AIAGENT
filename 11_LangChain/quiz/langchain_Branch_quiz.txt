@@ -1,0 +1,177 @@
+LANGCHAIN RETRIEVER / RAG 복습 실습
+===================================
+
+공통 환경
+---------
+- .env 파일
+  GEMINI_API_KEY=본인의_API_KEY
+- Chat Model: gemini-3.7-flash
+- Embedding Model: gemini-embedding-2
+- Embedding dimension: 768
+
+
+실습 문제 1. 스마트팩토리 설비 이상 원인 검색 RAG
+------------------------------------------------
+사용 데이터:
+data/factory_maintenance_720.csv
+
+상황:
+공장에는 유사한 설비 고장 사례가 매우 많습니다.
+단순 similarity 검색만 사용하면 거의 같은 원인의 문서가 반복적으로 검색될 수 있습니다.
+설비 담당자가 여러 가능성을 빠르게 비교할 수 있도록 MMR을 이용한 검색 결과를 구성하고,
+그 결과를 Context로 사용하는 RAG 체인을 완성하세요.
+
+요구사항:
+
+1) CSV 720행을 읽어 LangChain Document로 변환합니다.
+   - page_content: manual_text
+   - metadata에 다음 항목을 포함합니다.
+     manual_id, zone_code, equipment_code, equipment_name,
+     symptom_code, symptom_name, cause_code, cause_name,
+     severity, title
+
+2) RecursiveCharacterTextSplitter를 사용합니다.
+   - chunk_size = 260
+   - chunk_overlap = 50
+
+3) 각 chunk에 다음 metadata를 추가합니다.
+   - parent_manual_id
+   - chunk_index
+   - total_chunks
+
+4) ChromaDB를 생성하거나 기존 DB를 엽니다.
+   - persist_directory: chroma_factory_review
+   - collection_name: factory_maintenance_review
+
+5) 다음 질문을 이용하여 두 Retriever를 각각 실행합니다.
+
+   질문:
+   "컨베이어나 구동 모터에서 열이 올라가고 진동과 소음도 같이 발생합니다.
+    한 가지 원인만 말하지 말고 어떤 가능성을 점검해야 하는지 찾아주세요."
+
+   A. similarity retriever
+      search_type = "similarity"
+      k = 5
+
+   B. MMR retriever
+      search_type = "mmr"
+      k = 5
+      fetch_k = 20
+      lambda_mult = 0.35
+
+6) similarity 검색 결과와 MMR 결과를 각각 출력하고,
+   각 결과에 포함된 서로 다른 cause_code 개수도 출력합니다.
+   검색 결과의 다양성이 어떻게 달라지는지 직접 확인하세요.
+
+7) 최종 RAG에서는 MMR Retriever를 사용합니다.
+
+   question
+      ├─> MMR retriever
+      │      └─> RunnableLambda(format_documents) -> context
+      └─> RunnablePassthrough ---------------------> question
+
+   위 구조를 LCEL로 구현합니다.
+
+8) Prompt는 반드시 Context만 근거로 답변하도록 만듭니다.
+   답변 형식:
+   - 우선 점검 원인
+   - 확인 항목
+   - 안전상 주의사항
+
+9) 마지막에 다음을 출력합니다.
+   - 사용자 질문
+   - 최종 답변
+   - 검색 문서 수
+   - 검색된 문서의 manual_id / equipment_name / cause_name
+
+
+실습 문제 2. 학사규정 안전 안내 AI
+---------------------------------
+사용 데이터:
+data/university_policies_640.csv
+
+상황:
+학생의 질문과 관련 없는 규정을 근거로 LLM이 답변을 만들어내면 문제가 됩니다.
+따라서 특정 규정 분류만 검색하고, 유사도가 충분한 문서가 존재할 때만
+LLM을 호출하는 Safe RAG를 구현하세요.
+
+이번 실습의 검색 대상:
+policy_category = "graduation"
+
+요구사항:
+
+1) CSV 640행을 Document로 변환합니다.
+   - page_content: policy_text
+   - metadata:
+     policy_id, campus_code, campus_name,
+     policy_category, policy_category_ko,
+     student_type, effective_year,
+     department_scope, topic, title, priority
+
+2) RecursiveCharacterTextSplitter를 사용합니다.
+   - chunk_size = 300
+   - chunk_overlap = 60
+
+3) ChromaDB를 생성하거나 기존 DB를 엽니다.
+   - persist_directory: chroma_university_review
+   - collection_name: university_policy_review
+
+4) Retriever를 다음과 같이 구성합니다.
+   - search_type = "similarity_score_threshold"
+   - k = 5
+   - score_threshold = 0.72
+   - filter = {"policy_category": "graduation"}
+
+5) Retriever 결과를 받아 Context 문자열을 만드는
+   format_documents() 함수를 작성합니다.
+
+   Context에는 다음 내용을 포함합니다.
+   - policy_id
+   - campus_name
+   - student_type
+   - title
+   - policy_category_ko
+   - policy_text
+
+6) 다음 데이터 흐름을 만듭니다.
+
+   question
+      ↓
+   {
+       "question": RunnablePassthrough(),
+       "documents": retriever
+   }
+
+7) RunnableBranch를 사용합니다.
+
+   documents가 1개 이상:
+      → Context 구성
+      → Prompt
+      → LLM
+      → StrOutputParser
+      → answer, documents, llm_called=True 반환
+
+   documents가 0개:
+      → LLM을 호출하지 않음
+      → "관련 졸업 규정에서 근거를 찾지 못했습니다."
+      → documents=[]
+      → llm_called=False 반환
+
+8) 다음 두 질문을 반드시 테스트합니다.
+
+   관련 질문:
+   "서울캠퍼스 학부생이 졸업학점을 모두 채웠지만
+    졸업논문 심사를 통과하지 못했다면 졸업할 수 있나요?"
+
+   무관 질문:
+   "화성 탐사선의 통신 안테나는 어떤 주파수를 사용하나요?"
+
+9) 각 질문마다 다음을 출력합니다.
+   - 질문
+   - LLM 호출 여부
+   - 검색 문서 수
+   - 답변
+   - 검색된 policy_id와 title
+
+10) 핵심 확인:
+    무관 질문에서 검색 결과가 없다면 LLM이 호출되지 않아야 합니다.
