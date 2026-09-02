@@ -1,0 +1,389 @@
+------------------------------------------------------------
+실습 문제 1. 물류센터 출고 품질 재검수 Workflow
+------------------------------------------------------------
+
+사용 데이터:
+data/shipment_quality_650.csv
+
+
+[상황]
+
+물류센터에서는 출고 전에 품질점수를 검사합니다.
+
+각 출고 건에는 다음 정보가 있습니다.
+
+- shipment_id
+- center_name
+- product_group
+- initial_quality_score
+- target_quality_score
+- defect_count
+- main_defect
+- correction_gain
+- max_retries
+
+검수 결과 현재 품질점수가 목표점수보다 낮으면
+보정 작업을 수행한 뒤 다시 검사합니다.
+
+단, 최대 재시도 횟수를 넘으면 출고 보류로 처리해야 합니다.
+
+
+[목표]
+
+다음 구조의 LangGraph를 만드세요.
+
+START
+  ↓
+load_shipment
+  ↓
+quality_check
+  ↓
+route_quality
+  ├─ pass  → approved → END
+  └─ retry → correction
+                ↓
+             quality_check
+                ↓
+             route_quality
+                ├─ pass   → approved → END
+                └─ retry  → correction ...
+                └─ failed → rejected → END
+
+
+[요구사항]
+
+1. GraphState를 TypedDict로 작성하세요.
+
+최소 필드:
+
+shipment_id: str
+center_name: str
+product_group: str
+
+quality_score: int
+target_score: int
+
+defect_count: int
+main_defect: str
+correction_gain: int
+
+retry_count: int
+max_retries: int
+
+status: str
+result: str
+
+
+2. CSV에서 shipment_id를 찾아 State에 넣는
+load_shipment 노드를 작성하세요.
+
+실습용 shipment_id:
+
+SHP-0047
+
+
+3. quality_check 노드를 작성하세요.
+
+현재 다음 내용을 출력합니다.
+
+- 현재 품질점수
+- 목표 품질점수
+- 현재 재시도 횟수
+- 최대 재시도 횟수
+- 주요 불량 유형
+
+
+4. route_quality 함수를 작성하세요.
+
+조건:
+
+quality_score >= target_score
+    → "pass"
+
+quality_score < target_score
+AND retry_count >= max_retries
+    → "failed"
+
+그 외
+    → "retry"
+
+
+5. correction 노드를 작성하세요.
+
+보정 후 점수:
+
+new_score =
+    현재 quality_score
+    + correction_gain
+    - defect_count // 2
+
+그리고 retry_count를 1 증가시키세요.
+
+품질점수는 최대 100점까지만 허용합니다.
+
+
+6. approved 노드를 작성하세요.
+
+status = "approved"
+
+결과 예:
+
+"출고 승인: SHP-0047은 품질점수 91점으로
+목표점수 90점을 충족했습니다."
+
+
+7. rejected 노드를 작성하세요.
+
+status = "rejected"
+
+결과에 다음 내용을 포함합니다.
+
+- shipment_id
+- 최종 품질점수
+- 목표점수
+- 시도 횟수
+- 주요 불량
+
+
+8. add_conditional_edges()를 사용해
+pass / retry / failed 경로를 연결하세요.
+
+
+9. correction → quality_check로 다시 연결하여
+LangGraph에 반복 구조를 만드세요.
+
+
+10. 최종 State 전체와 result를 출력하세요.
+
+
+[추가 테스트]
+
+아래 shipment_id도 테스트해보세요.
+
+SHP-0118
+SHP-0275
+SHP-0499
+
+각 출고 건에 따라
+
+- 바로 승인
+- 몇 번 보정 후 승인
+- 최대 횟수 후 출고 보류
+
+중 하나의 흐름이 나타나는지 확인하세요.
+
+
+
+------------------------------------------------------------
+실습 문제 2. Gemini + LangGraph 사내 IT 장애 분류 AI
+------------------------------------------------------------
+
+사용 데이터:
+data/it_helpdesk_tickets_800.csv
+
+
+[상황]
+
+사내 헬프데스크에는 하루에도 많은 IT 문의가 접수됩니다.
+
+문의 내용을 Gemini가 분석한 다음,
+장애 유형에 따라 서로 다른 전문 처리 노드로 보내는
+LangGraph를 구현하려고 합니다.
+
+
+분류할 category:
+
+network
+account
+security
+device
+software
+general
+
+
+[목표]
+
+CSV Ticket
+   ↓
+load_ticket
+   ↓
+analyze_ticket
+   ↓
+route_ticket
+   ├─ network  → network_node  → END
+   ├─ account  → account_node  → END
+   ├─ security → security_node → END
+   ├─ device   → device_node   → END
+   ├─ software → software_node → END
+   └─ general  → general_node  → END
+
+
+[요구사항]
+
+1. 다음 형태의 Pydantic 모델을 만드세요.
+
+class TicketRoute(BaseModel):
+
+    category: Literal[
+        "network",
+        "account",
+        "security",
+        "device",
+        "software",
+        "general"
+    ]
+
+    reason: str
+
+    urgency: Literal[
+        "low",
+        "medium",
+        "high",
+        "critical"
+    ]
+
+
+2. GraphState를 TypedDict로 정의하세요.
+
+최소 필드:
+
+ticket_id: str
+title: str
+description: str
+department: str
+severity: str
+
+category: str
+reason: str
+urgency: str
+answer: str
+
+
+3. load_ticket 노드에서 CSV의 ticket_id를 찾아
+State에 티켓 정보를 넣으세요.
+
+기본 테스트 ticket_id:
+
+IT-0289
+
+
+4. analyze_ticket 노드에서는 Gemini를 호출해
+티켓 내용을 구조화하여 분류하세요.
+
+반드시 response_format에서
+
+TicketRoute.model_json_schema()
+
+를 사용하세요.
+
+
+5. 모델에게 다음 분류 기준을 제공하세요.
+
+network
+- 인터넷
+- Wi-Fi
+- VPN
+- 네트워크 연결
+- 통신 속도
+
+account
+- 로그인
+- 비밀번호
+- 계정 잠김
+- MFA
+- 접근 권한
+
+security
+- 피싱
+- 악성 파일
+- 계정 탈취
+- 랜섬웨어
+- 보안 경고
+
+device
+- 노트북
+- 모니터
+- 프린터
+- 키보드
+- 장비 고장
+
+software
+- 프로그램 오류
+- 앱 종료
+- 업데이트
+- 문서 프로그램
+- 브라우저 오류
+
+general
+- 위 범주가 아닌 일반 IT 문의
+
+
+6. Gemini가 반환한 JSON을
+
+TicketRoute.model_validate_json()
+
+으로 검증하세요.
+
+
+7. route_ticket 함수는
+
+state["category"]
+
+값을 반환하도록 작성하세요.
+
+
+8. 다음 전문 처리 Node를 작성하세요.
+
+network_node
+account_node
+security_node
+device_node
+software_node
+general_node
+
+
+9. 각 전문 Node에서는 Gemini를 한 번 더 호출하세요.
+
+예:
+
+security_node 조건:
+
+- 사용자가 바로 해야 할 행동을 먼저 제시
+- 의심 링크를 다시 열지 않도록 안내
+- 비밀번호 변경 또는 보안팀 신고 필요 여부 설명
+- 위험한 상황에서 임의로 문제를 해결하도록 안내하지 않음
+
+
+10. 각 Node의 답변에는 최소 다음 내용을 포함하도록 합니다.
+
+- 문제 유형
+- 우선 확인 또는 조치 항목
+- 다음 단계
+
+
+11. add_conditional_edges()를 이용해
+6개 category별 Node로 연결하세요.
+
+
+12. 실행 후 다음을 출력하세요.
+
+ticket_id
+title
+category
+reason
+urgency
+최종 답변
+
+
+[추가 테스트]
+
+아래 Ticket도 실행하세요.
+
+IT-0017
+IT-0162
+IT-0345
+IT-0528
+IT-0713
+
+서로 다른 전문 Node로 분기되는지 확인하세요.
+
