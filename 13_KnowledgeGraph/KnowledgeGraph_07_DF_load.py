@@ -51,7 +51,7 @@ for row in loaded_relations_df.to_dict(orient="records"):
     )
 
 
-print('\n[복원되 Node]')
+print('\n[복원된 Node]')
 
 for node, data in loaded_graph.nodes(data=True):
     print(node, data)
