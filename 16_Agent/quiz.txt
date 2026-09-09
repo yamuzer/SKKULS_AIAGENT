@@ -1,0 +1,192 @@
+
+============================================================
+실습 문제 1. 전자상거래 주문·재고·배송 Agent
+============================================================
+
+사용 데이터
+-----------
+data/products_600.csv
+data/warehouses_12.csv
+data/inventory_7200.csv
+data/shipping_rules_1344.csv
+
+
+[상황]
+
+온라인 쇼핑몰 상담 Agent를 구현합니다.
+
+사용자는 상품 ID와 구매 수량, 배송 지역을 말합니다.
+Agent는 필요한 Tool을 스스로 선택하여 다음 정보를 조사해야 합니다.
+
+- 상품 가격과 무게
+- 구매 수량을 만족하는 창고
+- 해당 창고에서 목적지까지의 배송비와 예상 배송일
+- 상품 총액
+- 최종 예상 결제액
+
+중요한 점은 한 Tool의 결과가 다음 Tool의 입력이 된다는 것입니다.
+
+예:
+
+PRD-0247
+   ↓
+find_product
+   ↓
+unit_price / weight_kg 확인
+
+PRD-0247 + quantity
+   ↓
+find_available_inventory
+   ↓
+warehouse_id 확인
+
+warehouse_id + destination_region + total_weight
+   ↓
+find_shipping_rule
+   ↓
+shipping_fee / estimated_days 확인
+
+unit_price + quantity + shipping_fee
+   ↓
+calculate_checkout_total
+   ↓
+최종 결제 예상액
+
+
+[구현할 Tool]
+
+1. find_product(product_id: str)
+
+상품 정보를 조회합니다.
+
+반환 예:
+{
+    "found": True,
+    "product_id": "...",
+    "product_name": "...",
+    "unit_price": 00000,
+    "weight_kg": 0.0,
+    "active": "Y"
+}
+
+
+2. find_available_inventory(
+    product_id: str,
+    required_quantity: int
+)
+
+구매 수량 이상을 보유한 창고를 검색합니다.
+
+반환 결과에는 최소 다음을 포함하세요.
+
+warehouse_id
+warehouse_name
+available_qty
+priority_rank
+
+가능한 창고가 여러 개면 priority_rank가 낮은 순서로 반환하세요.
+
+
+3. find_shipping_rule(
+    warehouse_id: str,
+    destination_region: str,
+    total_weight_kg: float
+)
+
+창고, 배송지역, 무게에 맞는 배송 규칙을 찾습니다.
+
+반환:
+shipping_fee
+estimated_days
+
+
+4. calculate_checkout_total(
+    unit_price: int,
+    quantity: int,
+    shipping_fee: int
+)
+
+반환:
+product_total
+shipping_fee
+checkout_total
+
+
+[Agent 요구사항]
+
+1. 위 Tool들을 @tool로 작성하세요.
+
+2. required_quantity, quantity 등은 1 이상이어야 하므로
+   Pydantic args_schema를 최소 1개 Tool에 적용하세요.
+
+3. tools 리스트를 만들고
+   model.bind_tools(tools)를 사용하세요.
+
+4. MessagesState를 상속한 AgentState에
+   tool_rounds: int를 추가하세요.
+
+5. MAX_TOOL_ROUNDS = 6으로 설정하세요.
+
+6. agent_node에서 SystemMessage와 누적 messages를
+   Gemini에 전달하세요.
+
+7. Tool Call이 있으면 tool_rounds를 1 증가시키세요.
+
+8. ToolNode(tools)를 사용하세요.
+
+9. route_after_agent()는
+   마지막 AIMessage에 tool_calls가 있으면 "tools",
+   없으면 "end"를 반환하세요.
+
+10. 그래프는 다음 구조로 작성하세요.
+
+START
+  ↓
+agent
+  ↓
+Tool Call 있음?
+  ├─ Yes → tools → agent
+  └─ No  → END
+
+11. Agent는 값이 없을 때 추측하면 안 됩니다.
+    예를 들어 warehouse_id가 필요한데 아직 모른다면
+    먼저 find_available_inventory를 사용해야 합니다.
+
+12. 최종 답변에는 다음을 포함하세요.
+
+- 상품명
+- 주문 수량
+- 선택 창고
+- 상품 금액
+- 배송비
+- 예상 결제액
+- 예상 배송일
+
+
+[기본 테스트 질문]
+
+"PRD-0247 상품 4개를 부산으로 보내려고 합니다.
+주문 가능한 창고를 찾아서 상품 금액, 배송비,
+최종 예상 결제액과 예상 배송일을 알려주세요."
+
+
+[추가 테스트 질문]
+
+1)
+"PRD-0088을 3개 서울로 보내면
+어느 창고에서 출고할 수 있고 총 얼마인가요?"
+
+2)
+"PRD-0412 상품 8개를 제주로 배송할 수 있는지 확인하고
+가능하다면 전체 결제 예상액까지 알려주세요."
+
+3)
+"PRD-0591 상품 2개를 대구로 보내려고 합니다.
+재고와 배송비를 확인해 주세요."
+
+4)
+"PRD-0123 상품 가격만 알려주세요."
+
+5)
+"오늘 서울 날씨가 어때?"
+→ 쇼핑몰 내부 Tool이 필요 없는 질문인지도 확인하세요.
