@@ -1,0 +1,399 @@
+
+============================================================
+실습 문제 1. State-Aware 출장·복지 정책 Agent
+============================================================
+
+사용 데이터
+-----------
+data/employees_800.csv
+data/benefit_policies_1080.csv
+
+
+[상황]
+
+사내 복지/출장 정책 상담 Agent를 구현합니다.
+
+중요한 조건:
+현재 사용자의 이름, 부서, 직급, 근무지역은
+Tool Argument로 LLM이 생성하면 안 됩니다.
+
+이 정보는 LangGraph State에 이미 들어 있고,
+Tool은 ToolRuntime을 이용해 runtime.state에서 읽어야 합니다.
+
+
+[AgentState]
+
+MessagesState를 상속하고 다음 필드를 추가하세요.
+
+user_id: str
+user_name: str
+department: str
+role: str
+region: str
+tool_rounds: int
+
+
+[구현할 Tool]
+
+1. get_current_user_profile(runtime: ToolRuntime)
+
+현재 사용자의
+user_id, user_name, department, role, region을
+runtime.state에서 읽어 반환합니다.
+
+주의:
+LLM이 생성하는 argument는 없어야 합니다.
+
+
+2. search_my_policy(
+    topic: str,
+    runtime: ToolRuntime
+)
+
+현재 사용자의 department, role, region을
+runtime.state에서 읽습니다.
+
+topic 예:
+출장숙박비
+출장교통비
+교육비
+재택근무
+장비지원
+건강검진
+
+benefit_policies_1080.csv에서
+현재 사용자의 조건에 맞는 정책을 찾아 반환하세요.
+
+지역 그룹 변환:
+서울/판교 -> 수도권
+제주 -> 제주
+그 외 -> 비수도권
+
+중요:
+department, role, region을 Tool Argument로 만들지 마세요.
+모델이 생성해야 하는 값은 topic 하나입니다.
+
+
+3. get_last_user_message(runtime: ToolRuntime)
+
+현재 MessagesState에서
+가장 최근 HumanMessage의 content를 반환합니다.
+
+
+4. get_conversation_state_info(runtime: ToolRuntime)
+
+현재 State의 다음 내용을 반환합니다.
+
+message_count
+user_id
+user_name
+department
+role
+region
+tool_rounds
+
+
+[Tool Schema 확인]
+
+각 Tool의 tool_call_schema를 출력하여
+LLM에게 실제로 노출되는 Argument를 확인하세요.
+
+특히 다음을 확인합니다.
+
+get_current_user_profile
+→ Argument 없음
+
+search_my_policy
+→ topic만 존재
+
+runtime
+→ LLM schema에 노출되지 않음
+
+
+[Graph]
+
+START
+  ↓
+agent
+  ↓
+Tool Call?
+  ├─ Yes → ToolNode → agent
+  └─ No  → END
+
+MAX_TOOL_ROUNDS = 5
+
+
+[기본 사용자]
+
+employees_800.csv에서
+USR-0137 사용자를 읽어서 초기 State를 구성하세요.
+
+
+[기본 테스트 질문]
+
+1.
+"내 이름과 부서, 직급, 근무지역을 알려줘."
+
+2.
+"내 부서와 직급 기준 출장숙박비 정책을 알려줘."
+
+3.
+"내 교육비 지원 기준이 어떻게 돼?"
+
+4.
+"내가 방금 입력한 메시지가 뭐야?"
+
+5.
+"현재 대화 State 정보를 보여줘."
+
+6.
+"Python의 dictionary가 무엇인지 설명해줘."
+→ State가 필요 없는 일반 질문이므로 Tool을 사용하지 않아야 합니다.
+
+
+[최종 출력]
+
+- execution history
+- HumanMessage / AIMessage / ToolMessage
+- Tool Sequence
+- 총 Tool Round
+- Final Answer
+
+
+============================================================
+실습 문제 2. 공급망 Graph + Vector Multi-Retrieval Agent
+============================================================
+
+사용 데이터
+-----------
+data/supply_chain_nodes.csv
+data/supply_chain_edges.csv
+data/supply_chain_documents_1200.csv
+
+
+[상황]
+
+공급망 분석 Agent를 구현합니다.
+
+이 Agent는 두 가지 서로 다른 검색 Tool을 사용합니다.
+
+1. graph_search
+   → 명시적인 공급망 관계 탐색
+
+2. vector_search
+   → 내부 품질/물류/생산 문서 의미 검색
+
+
+[Knowledge Graph]
+
+NetworkX MultiDiGraph를 사용하세요.
+
+node_type:
+supplier
+part
+product
+plant
+warehouse
+region
+
+relation:
+supplies
+used_in
+produced_at
+ships_to
+located_in
+
+
+[관계 의미]
+
+supplies
+supplier -> part
+
+used_in
+part -> product
+
+produced_at
+product -> plant
+
+ships_to
+plant -> warehouse
+
+located_in
+warehouse -> region
+
+
+[GraphSearchInput]
+
+start_entity: str
+
+relation_path:
+다음 Literal만 허용
+
+supplies
+used_in
+produced_at
+ships_to
+located_in
+
+최소 1개
+최대 5개
+
+
+[graph_search]
+
+예:
+
+SUP-003이 공급하는 부품
+relation_path = ["supplies"]
+
+SUP-003이 공급하는 부품이 사용되는 제품
+relation_path = [
+    "supplies",
+    "used_in"
+]
+
+SUP-003 → 부품 → 제품 → 생산공장
+relation_path = [
+    "supplies",
+    "used_in",
+    "produced_at"
+]
+
+
+[Vector DB]
+
+supply_chain_documents_1200.csv를
+LangChain Document로 변환하세요.
+
+page_content:
+content
+
+metadata:
+doc_id
+category
+product_id
+part_id
+supplier_id
+title
+revision
+
+ChromaDB:
+data/supply_chain_agent_db
+
+Collection:
+supply_chain_documents
+
+
+[VectorSearchInput]
+
+query: str
+
+top_k:
+1~5
+
+category:
+all
+quality
+logistics
+supplier
+production
+safety
+
+
+[vector_search]
+
+내부 품질/물류/공급업체/생산/안전 문서를
+의미 검색합니다.
+
+검색 결과:
+rank
+doc_id
+title
+category
+product_id
+part_id
+supplier_id
+content
+distance
+
+
+[Agent 규칙]
+
+1. Supplier, Part, Product, Plant, Warehouse, Region 사이의
+   구조적 관계 질문은 graph_search를 사용하세요.
+
+2. 내부 가이드, 문서, 품질 기준, 생산 절차 등
+   자연어 문서 검색은 vector_search를 사용하세요.
+
+3. Graph 검색 결과를 이용해 특정 Product에 대한
+   내부 문서를 찾아야 하는 경우:
+   graph_search
+   → 결과 관찰
+   → vector_search
+   순서로 실행하세요.
+
+4. Graph 결과를 확인하기 전에
+   graph_search와 vector_search를 동시에 호출하면 안 됩니다.
+
+5. Tool 결과에 없는 공급망 관계를 추측하지 마세요.
+
+6. Vector Search 결과를 사용한 최종 답변에는
+   Document ID를 표시하세요.
+
+7. MAX_TOOL_ROUNDS = 6
+
+
+[기본 테스트 질문]
+
+1. Graph 1-hop
+"SUP-003이 공급하는 부품은 무엇인가요?"
+
+Expected:
+graph_search
+
+
+2. Graph 2-hop
+"SUP-003이 공급하는 부품이 사용되는 제품을 찾아줘."
+
+Expected:
+graph_search
+
+
+3. Graph 5-hop
+"SUP-003의 공급 부품이 사용되는 제품이 생산되는 공장에서
+출하하는 창고가 어느 지역에 있는지 찾아줘."
+
+Expected:
+graph_search
+
+
+4. Vector Search
+"내부 문서에서 협력사 평가 기준에 관한 자료를 3개 찾아줘."
+
+Expected:
+vector_search
+
+
+5. Graph -> Vector
+"SUP-003이 공급하는 부품이 사용되는 제품을 먼저 찾고,
+그 제품의 품질 점검 내부 자료도 찾아서 설명해줘."
+
+Expected:
+graph_search -> vector_search
+
+
+6. Tool 불필요
+"Python에서 set이 무엇인지 간단히 설명해줘."
+
+Expected:
+Tool 사용 안 함
+
+
+[최종 출력]
+
+- Execution History
+- 실제 Tool Sequence
+- 총 Tool Round
+- Graph 검색 경로
+- Vector 검색 Document ID
+- Final Answer
