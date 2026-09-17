@@ -1,0 +1,439 @@
+Multi-Agent 실습
+=====================
+
+실습 문제. 고객 VOC 분석·보고 Multi-Agent 시스템
+=================================================
+
+사용 데이터
+-----------
+data/customer_voc_1500.csv
+data/service_policies_240.csv
+
+
+[학습 목표]
+
+이번 실습에서는 두 가지 Multi-Agent 구조를 하나의 시스템에 결합합니다.
+
+1. Router가 사용자의 최종 목적을 분석하여 적절한 Agent로 Handoff한다.
+2. 완성된 보고서가 필요한 경우 Research Agent가 먼저 데이터를 분석하고,
+   그 결과를 Writer Agent가 이어받아 최종 결과물을 작성한다.
+
+
+전체 구조
+---------
+
+                       ┌─ explainer_agent ─────────────→ END
+                       │
+START → router ────────┼─ research_agent
+                               │
+                               ├─ 분석만 필요 → END
+                               │
+                               └─ 보고서 필요 → writer_agent → END
+
+
+============================================================
+1. State 설계
+============================================================
+
+TypedDict로 VOCMultiAgentState를 작성하세요.
+
+최소 필드:
+
+question: str
+audience: str
+
+selected_agent: str
+route_reason: str
+route_confidence: int
+routed_task: str
+
+needs_writing: bool
+
+product_filter: str
+category_filter: str
+
+evidence_summary: str
+sample_vocs: list[str]
+policy_evidence: list[str]
+
+research_summary: str
+key_findings: list[str]
+risk_points: list[str]
+recommended_actions: list[str]
+recommended_structure: list[str]
+
+active_agent: str
+execution_order: list[str]
+
+final_answer: str
+
+
+============================================================
+2. Router Structured Output
+============================================================
+
+Pydantic BaseModel로 RouterDecision을 작성하세요.
+
+selected_agent:
+Literal[
+    "research_agent",
+    "explainer_agent"
+]
+
+reason: str
+
+confidence:
+0~100
+
+task_for_agent: str
+
+needs_writing: bool
+
+
+[Routing 기준]
+
+research_agent:
+- VOC를 분석해줘
+- 문제 유형을 조사해줘
+- 고객 불만의 핵심 원인을 정리해줘
+- 개선안을 분석해줘
+- 데이터를 바탕으로 보고서를 작성해줘
+- 발표용 요약을 만들어줘
+
+단:
+
+"분석만 해줘"
+"보고서는 아직 만들지 마"
+→ needs_writing=False
+
+"보고서 작성"
+"경영진 보고용으로 정리"
+"발표 자료용 문장"
+"최종 결과물 작성"
+→ needs_writing=True
+
+
+explainer_agent:
+- VOC 반복 문의율이 뭐야?
+- 왜 고객 만족도를 같이 봐야 해?
+- severity와 issue_category의 차이를 설명해줘.
+
+Router는 Command(update=..., goto=...)를 사용하세요.
+
+
+============================================================
+3. Evidence 생성
+============================================================
+
+Research Agent가 LLM에게 바로 전체 1,500행을 보내지 마세요.
+
+먼저 Python 코드로 VOC 데이터를 집계하여 evidence를 생성합니다.
+
+질문에 제품명이 포함되면 해당 Product만 필터링하세요.
+
+제품:
+SmartHome Hub
+AirPure Pro
+CleanBot X
+VisionCam
+FitBand
+SoundDock
+
+질문에 Category가 포함되면 해당 Category만 필터링하세요.
+
+Category:
+연결 오류
+앱 오류
+배송 지연
+초기 불량
+소음
+배터리
+계정 문제
+설치 문의
+
+
+Evidence에 최소 다음을 포함하세요.
+
+- 총 VOC 건수
+- 평균 만족도
+- 평균 해결시간
+- 반복 문의율
+- Severity 분포
+- Channel 분포
+- 상위 Issue Category
+- 대표 VOC 5건
+
+service_policies_240.csv에서도
+해당 Product / Category와 관련된 정책을 최대 5개 가져오세요.
+
+
+============================================================
+4. Research Agent
+============================================================
+
+Research Agent 출력은 with_structured_output()을 사용하세요.
+
+ResearchResult:
+
+summary: str
+key_findings: list[str]
+risk_points: list[str]
+recommended_actions: list[str]
+recommended_structure: list[str]
+
+
+Research Agent는:
+
+1. Evidence 해석
+2. 수치에서 보이는 특징 정리
+3. 반복 문의 / 낮은 만족도 / 긴 해결시간 등의 위험요인 정리
+4. 서비스 정책 근거와 연결
+5. 개선 방향 제안
+
+을 수행합니다.
+
+주의:
+데이터에 없는 수치를 만들어내면 안 됩니다.
+
+
+============================================================
+5. Research 이후 Routing
+============================================================
+
+Research Agent 실행 후 needs_writing 값을 확인하세요.
+
+needs_writing == False
+→ END
+
+needs_writing == True
+→ writer_agent
+
+
+즉:
+
+분석 요청
+router
+→ research_agent
+→ END
+
+
+보고서 요청
+router
+→ research_agent
+→ writer_agent
+→ END
+
+
+============================================================
+6. Writer Agent
+============================================================
+
+Writer Agent는 Research Agent 결과를 받아
+사용자가 바로 활용할 수 있는 완성된 결과물을 작성합니다.
+
+다음 내용을 전달하세요.
+
+research_summary
+key_findings
+risk_points
+recommended_actions
+recommended_structure
+audience
+원래 사용자 질문
+
+중요:
+Writer Agent가 원본 CSV 전체를 다시 분석하도록 만들지 마세요.
+
+
+audience 기준:
+
+beginner
+- 쉬운 설명
+
+intermediate
+- 수치와 원인 관계를 명확하게 설명
+
+instructor
+- 수업에서 사용할 수 있게
+- 분석 과정과 해석 포인트까지 포함
+
+manager
+- 경영진/관리자 관점
+- 핵심 지표와 Action Item 중심
+
+
+============================================================
+7. Explainer Agent
+============================================================
+
+Explainer Agent는 VOC 데이터를 분석하지 않습니다.
+
+개념을 설명합니다.
+
+권장 구조:
+
+[정의]
+[왜 중요한가]
+[VOC 분석에서 어떻게 보는가]
+[간단한 예]
+
+
+============================================================
+8. Graph 구성
+============================================================
+
+필수 Node:
+
+router
+research_agent
+writer_agent
+explainer_agent
+
+
+START
+→ router
+
+
+router는 Command를 사용하여
+
+research_agent
+또는
+explainer_agent
+
+로 이동합니다.
+
+
+research_agent 실행 후에는
+Conditional Edge를 사용합니다.
+
+needs_writing=True
+→ writer_agent
+
+needs_writing=False
+→ END
+
+
+writer_agent
+→ END
+
+explainer_agent
+→ END
+
+
+============================================================
+9. 실행 정보
+============================================================
+
+execution_order에 실행된 Agent를 누적하세요.
+
+예:
+
+분석만 요청:
+
+router
+→ research_agent
+
+
+보고서 요청:
+
+router
+→ research_agent
+→ writer_agent
+
+
+개념 설명:
+
+router
+→ explainer_agent
+
+
+최종 출력:
+
+Selected Agent
+Route Confidence
+Route Reason
+Needs Writing
+Evidence Summary
+Execution Order
+Final Answer
+
+
+============================================================
+10. 기본 테스트
+============================================================
+
+TEST 1
+
+"SmartHome Hub의 연결 오류 VOC를 분석해서
+반복 문의와 해결시간 측면의 핵심 문제를 정리해줘.
+보고서는 아직 만들지 마."
+
+audience:
+intermediate
+
+Expected:
+router → research_agent
+needs_writing=False
+
+
+TEST 2
+
+"AirPure Pro의 초기 불량 VOC를 분석하고
+관리자 회의에서 바로 사용할 수 있는
+개선 보고서 형태로 작성해줘."
+
+audience:
+manager
+
+Expected:
+router → research_agent → writer_agent
+needs_writing=True
+
+
+TEST 3
+
+"VOC에서 반복 문의율이 왜 중요한 지표인지
+초보자도 이해할 수 있게 설명해줘."
+
+audience:
+beginner
+
+Expected:
+router → explainer_agent
+
+
+TEST 4
+
+"전체 VOC에서 만족도가 낮아지는 주요 패턴을 분석해줘."
+
+audience:
+instructor
+
+Expected:
+router → research_agent
+
+
+TEST 5
+
+"CleanBot X의 배터리 VOC를 분석해서
+5분 발표용 요약문으로 만들어줘."
+
+audience:
+instructor
+
+Expected:
+router → research_agent → writer_agent
+
+
+============================================================
+11. 확인해야 할 핵심
+============================================================
+
+1. Router가 질문 내용을 직접 처리하지 않는가?
+2. Router가 needs_writing을 올바르게 판단하는가?
+3. Research Agent가 데이터 Evidence를 기반으로 분석하는가?
+4. Writer Agent가 Research 결과를 이어받는가?
+5. 분석만 요청했는데 Writer Agent가 실행되지 않는가?
+6. 개념 설명 질문에서 Research Agent가 실행되지 않는가?
+7. execution_order가 실제 흐름과 일치하는가?
+8. Router confidence를 정답 확률처럼 해석하지 않는가?
