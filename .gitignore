@@ -9,6 +9,10 @@ output/quality/*
 reports/*
 !reports/.gitkeep
 
+
+# secret
+secret/
+
 # data
 data/
 output/
